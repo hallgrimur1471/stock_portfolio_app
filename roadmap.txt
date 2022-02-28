@@ -10,7 +10,11 @@ Roadmap:
 Notes:
 * Use Bootstrap 4+
 * Use ng-bootstrap
-* Use Angular 7+ (Angular 10 recommended)
+* Use Angular 7+ (Angular 10 recommended) (can use later version as well)
 * Use Node.js + Express.js
 
 * Implement autocomplete using Angular Material
+* Make API calls to Finhub in Node.js by using Express HTTP (recommended)
+* Behaviour of footer: https://piazza.com/class/kxindf11ki56s2?cid=431
+* from & to parameters on charts API: https://piazza.com/class/kxindf11ki56s2?cid=434
+* from & to parameters for news tab: https://piazza.com/class/kxindf11ki56s2?cid=435
