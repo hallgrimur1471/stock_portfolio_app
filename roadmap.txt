@@ -1,0 +1,16 @@
+Roadmap:
+[] Setup express?
+[] Setup Angular
+[] Setup Angular Material
+[] Setup Angular Routing
+[] Setup ng-bootstrap
+[] Try Bootstrap UI Components using the Bootstrap Grid System
+[] Set up Boostrap Navbar for the page?
+
+Notes:
+* Use Bootstrap 4+
+* Use ng-bootstrap
+* Use Angular 7+ (Angular 10 recommended)
+* Use Node.js + Express.js
+
+* Implement autocomplete using Angular Material
