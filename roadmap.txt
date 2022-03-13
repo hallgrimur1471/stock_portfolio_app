@@ -1,11 +1,23 @@
 Roadmap:
-[] Setup express?
+[x] Setup express
 [] Setup Angular
 [] Setup Angular Material
 [] Setup Angular Routing
 [] Setup ng-bootstrap
+    * https://www.c-sharpcorner.com/article/getting-started-with-ng-bootstrap-in-angular-5-app/
 [] Try Bootstrap UI Components using the Bootstrap Grid System
 [] Set up Boostrap Navbar for the page?
+[] Impelent Navbar
+    * navbar tutorial, including in collapse: https://www.youtube.com/watch?v=akXfF066MY0
+    * controlling navbar styles: https://stackoverflow.com/questions/41743102/changing-the-color-of-active-nav-item
+[] Implement persistent search component state: "Usage of router doesn't refresh the page but it would reinitialize the component as you mentioned if navigated back. There are different strategies to save the component state globally using a service, which is part of the research to implement this." @452
+    * https://peterdaugaardrasmussen.com/2021/03/14/angular-how-to-keep-state-when-navigating-between-routes/
+    * https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
+[] Make sure stock prices are calculated using LIFO?: @458
+[] Use 60 seconds instead of 5 minutes to determine if market is open @466, we can use 5 min though @525
+[] For current time in stock details: Use LA time
+[]
+
 
 Notes:
 * Use Bootstrap 4+
@@ -18,3 +30,13 @@ Notes:
 * Behaviour of footer: https://piazza.com/class/kxindf11ki56s2?cid=431
 * from & to parameters on charts API: https://piazza.com/class/kxindf11ki56s2?cid=434
 * from & to parameters for news tab: https://piazza.com/class/kxindf11ki56s2?cid=435
+* fix angular cache issue: https://elelad.medium.com/avoid-cache-trap-when-serving-angular-app-c5981653d156
+* Angular video tutorial: https://www.youtube.com/playlist?list=PLC3y8-rFHvwhBRAgFinJR8KHIrCdTkZcZ
+* Updating child components, check out two-way-binding: https://angular.io/guide/two-way-binding
+* Angular & NodeJS together:
+    * https://medium.com/bb-tutorials-and-thoughts/how-to-develop-and-build-angular-app-with-nodejs-e24c40444421
+    * https://dev.to/rajesh04159786/connecting-angular-application-with-nodejs-backend-1l81
+
+Angular notes:
+* Pipes: https://angular.io/guide/pipes
+* FormsModule (ngModel): https://angular.io/api/forms/FormsModule

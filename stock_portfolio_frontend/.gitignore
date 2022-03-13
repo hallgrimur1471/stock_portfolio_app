@@ -1,11 +1,13 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
 # Compiled output
-stock_portfolio_frontend/dist
-stock_portfolio_frontend/tmp
-stock_portfolio_frontend/out-tsc
-stock_portfolio_frontend/bazel-out
+/dist
+/tmp
+/out-tsc
+/bazel-out
 
 # Node
-node_modules
+/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -27,13 +29,13 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-stock_portfolio_frontend/.angular/cache
+/.angular/cache
 .sass-cache/
-stock_portfolio_frontend/connect.lock
-stock_portfolio_frontend/coverage
-stock_portfolio_frontend/libpeerconnection.log
+/connect.lock
+/coverage
+/libpeerconnection.log
 testem.log
-stock_portfolio_frontend/typings
+/typings
 
 # System files
 .DS_Store
