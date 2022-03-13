@@ -40,3 +40,12 @@ Notes:
 Angular notes:
 * Pipes: https://angular.io/guide/pipes
 * FormsModule (ngModel): https://angular.io/api/forms/FormsModule
+* ngFor directive: https://angular.io/guide/built-in-directives#ngFor
+    * structural directives? https://angular.io/guide/structural-directives
+* Event binding: https://angular.io/guide/event-binding
+* Property binding (<app-hero-detail [hero]="selectedHero"></app-hero-detail>): https://angular.io/guide/property-binding
+* Sharing data between child and parent directives and components: https://angular.io/guide/inputs-outputs
+
+provider: something that can create or deliver a service.
+service: 
+component: 
