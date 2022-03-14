@@ -1,6 +1,8 @@
 Roadmap:
 [x] Setup express
-[] Setup Angular
+[x] Setup Angular
+[] Setup express
+[] Implement back-end
 [] Setup Angular Material
 [] Setup Angular Routing
 [] Setup ng-bootstrap
@@ -45,6 +47,8 @@ Angular notes:
 * Event binding: https://angular.io/guide/event-binding
 * Property binding (<app-hero-detail [hero]="selectedHero"></app-hero-detail>): https://angular.io/guide/property-binding
 * Sharing data between child and parent directives and components: https://angular.io/guide/inputs-outputs
+* Directives.. RouterLink is an example: https://angular.io/api/router/RouterModule
+* AsyncPipe: https://angular.io/api/common/AsyncPipe
 
 provider: something that can create or deliver a service.
 service: 
