@@ -4,13 +4,26 @@
 
     npm install
 
-## Running locally
+## Running locally for development
 
-    npm start
+```
+# Terminal 1:
+npm run dev
+
+# Terminal 2:
+ng serve
+
+# open http://localhost:4200
+```
 
 ## Deploying to App Engine
 
-    gcloud app deploy
+```
+cd stock_porfolio_frontend
+npm run build
+cd ..
+gcloud app deploy
+```
 
 ## Additional gcloud commands
 

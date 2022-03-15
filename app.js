@@ -3,26 +3,37 @@
 // [START gae_node_request_example]
 const express = require('express');
 
+// Reads .env and adds values to process.env
+require('dotenv').config();
+
 const app = express();
 
+app.use(express.static(process.cwd() + "/stock_portfolio_frontend/dist/stock_portfolio_frontend/"));
+
 app.get("/", (req, res) => {
-  res.status(200).send('Hello, world!').end();
+  res.sendFile(process.cwd() + "/stock_portfolio_frontend/dist/stock_portfolio_frontend/index.html");
 
   // TODO: redirect to /search/home
 });
 
+app.get("/api/example", (req, res) => {
+  //res.setHeader('Conent-Type', 'application/json');
+  //res.end(JSON.stringify({ "example": "value" }));
+  res.json({ example: "value" });
+});
+
 // Shows details of the <ticker> searched
-app.get("/search/<ticker>", (req, res) => {
+app.get("/api/search/<ticker>", (req, res) => {
 
 });
 
 // Displays the watchlist of the user
-app.get("/search/<ticker>", (req, res) => {
+app.get("/api/search/<ticker>", (req, res) => {
 
 });
 
 // Displays the portfolio of the user
-app.get("/portfolio", (req, res) => {
+app.get("/api/portfolio", (req, res) => {
 
 });
 
