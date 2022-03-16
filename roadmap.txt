@@ -1,8 +1,8 @@
 Roadmap:
 [x] Setup express
 [x] Setup Angular
-[] Setup express
-[] Implement back-end
+[x] Setup express
+[x] Implement back-end
 [] Setup Angular Material
 [] Setup Angular Routing
 [] Setup ng-bootstrap
@@ -18,8 +18,6 @@ Roadmap:
 [] Make sure stock prices are calculated using LIFO?: @458
 [] Use 60 seconds instead of 5 minutes to determine if market is open @466, we can use 5 min though @525
 [] For current time in stock details: Use LA time
-[]
-
 
 Notes:
 * Use Bootstrap 4+
@@ -49,6 +47,12 @@ Angular notes:
 * Sharing data between child and parent directives and components: https://angular.io/guide/inputs-outputs
 * Directives.. RouterLink is an example: https://angular.io/api/router/RouterModule
 * AsyncPipe: https://angular.io/api/common/AsyncPipe
+
+Angular Material:
+* ngg add '@angular/material'
+    * Added indogo & pink theme
+    * Added typography
+    * Added BrowserAnimationsModule
 
 provider: something that can create or deliver a service.
 service: 
