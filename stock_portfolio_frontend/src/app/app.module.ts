@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from './search/search.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SearchComponent } from './search/search.component';
     MatNativeDateModule,
     MaterialExampleModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
