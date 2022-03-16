@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { BuyModalComponent } from '../buy-modal/buy-modal.component'
 
 interface Alert {
   type: string;
@@ -36,9 +39,11 @@ export class SearchResultsComponent implements OnInit {
 
   open() {
     console.log("open clicked");
+    const modalRef = this.modalService.open(BuyModalComponent);
+    modalRef.componentInstance.name = "World :)";
   }
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
     this.reset();
   }
 

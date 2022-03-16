@@ -3,10 +3,16 @@ Roadmap:
 [x] Setup Angular
 [x] Setup express
 [x] Implement back-end
-[] Setup Angular Material
+[x] Setup Angular material
+[] Implement search bar
+    [] Add autocomplete
+    [] Add HTTP calls on keypress which update the autocomplete list
+    [] Add loading animation
 [] Setup Angular Routing
-[] Setup ng-bootstrap
+[x] Setup ng-bootstrap
     * https://www.c-sharpcorner.com/article/getting-started-with-ng-bootstrap-in-angular-5-app/
+[x] Add ng-bootstrap Modal: https://ng-bootstrap.github.io/#/components/modal/examples
+[x] Add ng-bootstrap Alert: https://ng-bootstrap.github.io/#/components/alert/examples
 [] Try Bootstrap UI Components using the Bootstrap Grid System
 [] Set up Boostrap Navbar for the page?
 [] Impelent Navbar
