@@ -15,9 +15,12 @@ Roadmap:
 [x] Add ng-bootstrap Alert: https://ng-bootstrap.github.io/#/components/alert/examples
 [] Try Bootstrap UI Components using the Bootstrap Grid System
 [] Set up Boostrap Navbar for the page?
-[] Impelent Navbar
+[] Implement Navbar
+    * navbar documentation: https://getbootstrap.com/docs/4.0/components/navbar/
     * navbar tutorial, including in collapse: https://www.youtube.com/watch?v=akXfF066MY0
     * controlling navbar styles: https://stackoverflow.com/questions/41743102/changing-the-color-of-active-nav-item
+    [] First draft with functionality
+    [] Improved version with correct look
 [] Implement persistent search component state: "Usage of router doesn't refresh the page but it would reinitialize the component as you mentioned if navigated back. There are different strategies to save the component state globally using a service, which is part of the research to implement this." @452
     * https://peterdaugaardrasmussen.com/2021/03/14/angular-how-to-keep-state-when-navigating-between-routes/
     * https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
