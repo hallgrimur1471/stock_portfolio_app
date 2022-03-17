@@ -1,0 +1,52 @@
+<p>search works!</p>
+
+<ul class="options">
+    <li *ngFor="let option of options">
+        <p>{{option}}</p>
+    </li>
+</ul>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Number</mat-label>
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+            [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
+
+<form class="form-inline mx-auto w-25 row rounded-pill">
+    <input class="col-8 rounded-pill rounded-left" type="text" placeholder="Enter stock ticker symbol"
+        aria-label="Search">
+    <button class="butn col-2" type="submit"></button>
+    <button class="butn col-2" type="reset"></button>
+</form>
+
+
+<div class="input-group mb-4 border rounded-pill p-1">
+    <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon3"
+        class="form-control bg-none border-0">
+    <div class="input-group-append border-0">
+        <button id="button-addon3" type="button" class="btn btn-link text-success"><i class="fa fa-search"></i></button>
+    </div>
+</div>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+    viewBox="0 0 16 16">
+    <path
+        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+</svg>
+<p>bootstrap</p>
+<i class="bi bi-search" style="font-size: 1em"></i>
+<p>font awesome</p>
+<i class="fa-solid fa-magnifying-glass"></i>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+    <path
+        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+</svg>
+
+<app-search-results></app-search-results>

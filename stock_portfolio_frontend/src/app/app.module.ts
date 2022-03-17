@@ -25,6 +25,7 @@ import { BuyModalComponent } from './buy-modal/buy-modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
+import { ScrapyardComponent } from './scrapyard/scrapyard.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
     NavbarComponent,
     WatchlistComponent,
     PortfolioComponent,
+    ScrapyardComponent,
   ],
   imports: [
     BrowserModule,
