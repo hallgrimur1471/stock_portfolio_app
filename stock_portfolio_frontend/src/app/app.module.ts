@@ -16,6 +16,7 @@ import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { BuyModalComponent } from './buy-modal/buy-modal.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BuyModalComponent } from './buy-modal/buy-modal.component';
     SearchComponent,
     SearchResultsComponent,
     BuyModalComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
