@@ -8,7 +8,7 @@ Roadmap:
     [] Add autocomplete
     [] Add HTTP calls on keypress which update the autocomplete list
     [] Add loading animation
-[] Setup Angular Routing
+[x] Setup Angular Routing
 [x] Setup ng-bootstrap
     * https://www.c-sharpcorner.com/article/getting-started-with-ng-bootstrap-in-angular-5-app/
 [x] Add ng-bootstrap Modal: https://ng-bootstrap.github.io/#/components/modal/examples
