@@ -37,6 +37,10 @@ export class SearchComponent implements OnInit {
     );
   }
 
+  search(ticker: string): void {
+    console.log(`searching for ${ticker}...`)
+  }
+
   private _filter2(val: string): Observable<any[]> {
     if (val.length < 1) {
       this.loading = false;

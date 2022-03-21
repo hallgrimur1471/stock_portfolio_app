@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 
 // ng-bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,6 +47,7 @@ import { ScrapyardComponent } from './scrapyard/scrapyard.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatAutocompleteModule,
+    MatButtonModule,
     FormsModule,
     MatNativeDateModule,
     MaterialExampleModule,

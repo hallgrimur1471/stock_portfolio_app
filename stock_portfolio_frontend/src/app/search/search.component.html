@@ -1,19 +1,21 @@
-<p>search works!</p>
 <p>{{description.country}}</p>
 <p>{{description_str}}</p>
 
 <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Number</mat-label>
-        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
-            [matAutocomplete]="auto">
+    <mat-form-field class=" example-full-width" appearance="fill">
+        <mat-label>Enter stock ticker symbol</mat-label>
+        <input #searchBox type="text" placeholder="Pick one" aria-label="Stock ticker symbol" matInput
+            [formControl]="myControl" [matAutocomplete]="auto" (keydown.enter)="search(searchBox.value)"
+            oninput="this.value = this.value.toUpperCase()">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
             <mat-option disabled class="loading" *ngIf="loading">
                 <mat-spinner diameter="40"></mat-spinner>
             </mat-option>
-            <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+            <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option" (click)="search(option)">
                 {{option}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
+    <button mat-button style="margin-left: 600px" (click)="search(searchBox.value)">Search</button>
+    <button mat-button style="margin-left: 600px" (click)="searchBox.value=''">Clear</button>
 </form>

@@ -7,4 +7,7 @@
   .example-full-width {
     width: 100%;
   }
-  
+  button {
+    position: relative;
+    display: inline;
+  }
