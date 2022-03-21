@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { debounceTime, map, switchMap, startWith, distinctUntilChanged } from 'rxjs/operators';
 
 import { ApiService } from '../api.service';
 
@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
 
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions$!: Observable<string[]>;
+  filteredOptions$!: Observable<any[]>;
 
   constructor(private apiService: ApiService) { }
 
@@ -27,8 +27,30 @@ export class SearchComponent implements OnInit {
 
     this.filteredOptions$ = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value)),
+      debounceTime(200),
+      distinctUntilChanged(),
+      //map((val) => val.length < 2 ? [] : val),
+      switchMap(val => {
+        //return of(this.options)
+        return this._filter2(val || '')
+      })
+      //map(value => this._filter(value)),
     );
+  }
+
+  private _filter2(val: string): Observable<any[]> {
+    if (val.length < 1) {
+      return of([]);
+    }
+    return this.apiService.getCompanies(val)
+      .pipe(
+        map(response => response.filter(company => {
+          return (company.type == "Common Stock") &&
+            (!company.symbol.includes(".")) &&
+            this.startsWithIgnoreCase(company.displaySymbol, val)
+        })),
+        map(response => response.map(company => company.symbol))
+      )
   }
 
   getDescription() {
@@ -39,9 +61,15 @@ export class SearchComponent implements OnInit {
       });
   }
 
+  private startsWithIgnoreCase(s1: string, val: string) {
+    return s1.toLowerCase().indexOf(val.toLowerCase()) === 0
+  }
+
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter(option => {
+      return option.toLowerCase().includes(filterValue)
+    });
   }
 }

@@ -17,6 +17,18 @@ export class ApiService {
         private http: HttpClient,
     ) { }
 
+    getCompanies(search: string): Observable<any[]> {
+        const url = `${this.apiUrl}/autocomplete?symbol=${search}`;
+        return this.http.get<any>(url)
+            .pipe(
+                map(obj => obj.result)
+            )
+        //return this.http.get<object>(url).pipe(
+        //    tap(_ => console.log(`fetched autocomplete for search=${search}`)),
+        //    catchError(this.handleError<object>(`getCompanies search=${search}`))
+        //);
+    }
+
     getDescription(ticker: string): Observable<object> {
         const url = `${this.apiUrl}/description?symbol=${ticker}`;
         return this.http.get<object>(url).pipe(
