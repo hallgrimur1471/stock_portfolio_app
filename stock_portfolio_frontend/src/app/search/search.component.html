@@ -8,6 +8,9 @@
         <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
             [matAutocomplete]="auto">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option disabled class="loading" *ngIf="loading">
+                <mat-spinner diameter="40"></mat-spinner>
+            </mat-option>
             <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
                 {{option}}
             </mat-option>
