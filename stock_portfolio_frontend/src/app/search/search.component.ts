@@ -18,7 +18,10 @@ export class SearchComponent implements OnInit {
   autocompleteOptions$!: Observable<any[]>;
   loading = false;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private rs: SearchResultsService
+  ) { }
 
   ngOnInit(): void {
     this.autocompleteOptions$ = this.control.valueChanges.pipe(
@@ -33,6 +36,7 @@ export class SearchComponent implements OnInit {
 
   search(ticker: string): void {
     console.log(`searching for ${ticker}...`)
+    this.rs.fetchResultsFor(ticker);
   }
 
   clearSearchResults(): void {
