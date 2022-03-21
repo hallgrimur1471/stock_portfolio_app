@@ -5,6 +5,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, map, switchMap, tap, startWith, distinctUntilChanged } from 'rxjs/operators';
 
 import { ApiService } from '../api.service';
+import { SearchResultsService } from '../search-results.service';
 
 
 @Component({
@@ -13,26 +14,19 @@ import { ApiService } from '../api.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  description: any = Object();
-  description_str: string = "";
-
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions$!: Observable<any[]>;
-
+  control = new FormControl();
+  autocompleteOptions$!: Observable<any[]>;
   loading = false;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.getDescription();
-
-    this.filteredOptions$ = this.myControl.valueChanges.pipe(
+    this.autocompleteOptions$ = this.control.valueChanges.pipe(
       startWith(''),
       debounceTime(200),
       distinctUntilChanged(),
       switchMap(val => {
-        return this._filter2(val || '')
+        return this.getOptions(val || '')
       })
     );
   }
@@ -41,7 +35,11 @@ export class SearchComponent implements OnInit {
     console.log(`searching for ${ticker}...`)
   }
 
-  private _filter2(val: string): Observable<any[]> {
+  clearSearchResults(): void {
+    // TODO: implement
+  }
+
+  private getOptions(val: string): Observable<any[]> {
     if (val.length < 1) {
       this.loading = false;
       return of([]);
@@ -59,23 +57,18 @@ export class SearchComponent implements OnInit {
       )
   }
 
-  getDescription() {
-    this.apiService.getDescription("TSLA")
-      .subscribe(desc => {
-        this.description = desc;
-        this.description_str = JSON.stringify(desc);
-      });
-  }
-
   private startsWithIgnoreCase(s1: string, val: string) {
     return s1.toLowerCase().indexOf(val.toLowerCase()) === 0
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  // description: any = Object();
+  // description_str: string = "";
 
-    return this.options.filter(option => {
-      return option.toLowerCase().includes(filterValue)
-    });
-  }
+  // getDescription() {
+  //   this.apiService.getDescription("TSLA")
+  //     .subscribe(desc => {
+  //       this.description = desc;
+  //       this.description_str = JSON.stringify(desc);
+  //     });
+  // }
 }
