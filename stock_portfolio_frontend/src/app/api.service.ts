@@ -37,6 +37,14 @@ export class ApiService {
         );
     }
 
+    getQuote(ticker: string): Observable<object> {
+        const url = `${this.apiUrl}/quote?symbol=${ticker}`;
+        return this.http.get<object>(url).pipe(
+            tap(_ => console.log(`fetched quote for ticker=${ticker}`)),
+            catchError(this.handleError<object>(`getQuote ticker=${ticker}`))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             // TODO: send the error to remote logging infrastructure

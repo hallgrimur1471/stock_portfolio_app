@@ -29,6 +29,7 @@ import { WatchlistComponent } from './watchlist/watchlist.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ScrapyardComponent } from './scrapyard/scrapyard.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
+import { SearchFormComponent } from './search-form/search-form.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { StockDetailsComponent } from './stock-details/stock-details.component';
     PortfolioComponent,
     ScrapyardComponent,
     StockDetailsComponent,
+    SearchFormComponent,
   ],
   imports: [
     BrowserModule,

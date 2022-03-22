@@ -1,0 +1,27 @@
+<div class="container search-form-container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-5">
+            <form class="example-form">
+                <mat-form-field class=" example-full-width" appearance="fill">
+                    <mat-label>Enter stock ticker symbol</mat-label>
+                    <input #searchBox type="text" placeholder="" aria-label="Stock ticker symbol" matInput
+                        [formControl]="control" [matAutocomplete]="auto"
+                        (keydown.enter)="handleEnterKeypress(searchBox.value)"
+                        oninput="this.value = this.value.toUpperCase()">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option disabled class="loading" *ngIf="loading">
+                            <mat-spinner diameter="40"></mat-spinner>
+                        </mat-option>
+                        <mat-option *ngFor="let option of autocompleteOptions$ | async" [value]="option"
+                            (click)="search(option)">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <button mat-button style="margin-left: 50px" (click)="search(searchBox.value)">Search</button>
+                <button mat-button style="margin-left: 50px"
+                    (click)="searchBox.value=''; clearSearchResults()">Clear</button>
+            </form>
+        </div>
+    </div>
+</div>
