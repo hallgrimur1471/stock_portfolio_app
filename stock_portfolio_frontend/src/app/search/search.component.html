@@ -2,9 +2,9 @@
     <mat-form-field class=" example-full-width" appearance="fill">
         <mat-label>Enter stock ticker symbol</mat-label>
         <input #searchBox type="text" placeholder="Pick one" aria-label="Stock ticker symbol" matInput
-            [formControl]="control" [matAutocomplete]="auto" (keydown.enter)="search(searchBox.value)"
+            [formControl]="control" [matAutocomplete]="auto" (keydown.enter)="handleEnterKeypress(searchBox.value)"
             oninput="this.value = this.value.toUpperCase()">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete">
             <mat-option disabled class="loading" *ngIf="loading">
                 <mat-spinner diameter="40"></mat-spinner>
             </mat-option>
@@ -16,3 +16,6 @@
     <button mat-button style="margin-left: 600px" (click)="search(searchBox.value)">Search</button>
     <button mat-button style="margin-left: 600px" (click)="searchBox.value=''; clearSearchResults()">Clear</button>
 </form>
+<ng-container *ngIf="rs.hasResults">
+    <app-stock-details></app-stock-details>
+</ng-container>

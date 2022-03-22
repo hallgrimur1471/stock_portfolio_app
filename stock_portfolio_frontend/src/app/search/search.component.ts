@@ -16,15 +16,17 @@ import { SearchResultsService } from '../search-results.service';
 export class SearchComponent implements OnInit {
   control = new FormControl();
   autocompleteOptions$!: Observable<any[]>;
+  subscription$!: Observable<any[]>;
   loading = false;
 
   constructor(
     private apiService: ApiService,
-    private rs: SearchResultsService
+    public rs: SearchResultsService
   ) { }
 
   ngOnInit(): void {
-    this.autocompleteOptions$ = this.control.valueChanges.pipe(
+
+    this.subscription$ = this.control.valueChanges.pipe(
       startWith(''),
       debounceTime(200),
       distinctUntilChanged(),
@@ -32,6 +34,14 @@ export class SearchComponent implements OnInit {
         return this.getOptions(val || '')
       })
     );
+    this.autocompleteOptions$ = this.subscription$;
+  }
+
+  handleEnterKeypress(ticker: string): void {
+    console.log("handling enter...")
+    this.loading = false;
+    // this.autocompleteOptions$ = this.subscription$;
+    // this.search(ticker);
   }
 
   search(ticker: string): void {

@@ -7,11 +7,27 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class SearchResultsService {
-  description!: Observable<object>;
+  description: string = "";
+  hasResults = false;
 
   constructor(private api: ApiService) { }
 
   fetchResultsFor(ticker: string) {
-    this.description = this.api.getDescription(ticker);
+    this.api.getDescription(ticker)
+      .subscribe(description => {
+        this.description = JSON.stringify(description);
+        this.hasResults = true;
+      })
   }
+
+  // getDescription() {
+  //   return this.description
+  // }
+  // getDescription() {
+  //   this.apiService.getDescription("TSLA")
+  //     .subscribe(desc => {
+  //       this.description = desc;
+  //       this.description_str = JSON.stringify(desc);
+  //     });
+  // }
 }
