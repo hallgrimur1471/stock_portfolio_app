@@ -30,6 +30,7 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { ScrapyardComponent } from './scrapyard/scrapyard.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { StockTabsComponent } from './stock-tabs/stock-tabs.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
     ScrapyardComponent,
     StockDetailsComponent,
     SearchFormComponent,
+    StockTabsComponent,
   ],
   imports: [
     BrowserModule,
