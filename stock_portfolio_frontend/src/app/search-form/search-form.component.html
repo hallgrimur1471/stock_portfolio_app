@@ -1,6 +1,6 @@
 <div class="container search-form-container">
     <div class="row justify-content-center align-items-center">
-        <div class="col-5">
+        <div class="col-8 d-flex justify-content-center" style="border-bottom: solid; border-width: 1px">
             <form class="example-form">
                 <mat-form-field class=" example-full-width" appearance="fill">
                     <mat-label>Enter stock ticker symbol</mat-label>
@@ -18,8 +18,8 @@
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-                <button mat-button style="margin-left: 50px" (click)="search(searchBox.value)">Search</button>
-                <button mat-button style="margin-left: 50px"
+                <button mat-button style="margin-left: 20px" (click)="search(searchBox.value)">Search</button>
+                <button mat-button style="margin-left: 20px"
                     (click)="searchBox.value=''; clearSearchResults()">Clear</button>
             </form>
         </div>

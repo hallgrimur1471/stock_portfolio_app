@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="sd-ticker-line">
-                <span class="sd-ticker h2 align-top">TSLA</span>
+                <span class="sd-ticker h2 align-top">{{rs.description.ticker}}</span>
                 <!--https://icons.getbootstrap.com/icons/star/-->
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                     class="bi bi-star sd-star" viewBox="0 0 16 16">
@@ -11,10 +11,10 @@
                 </svg>
             </div>
             <div class="my-2 text-muted sd-company-name h5">
-                Tesla Inc
+                {{rs.description.name}}
             </div>
             <div class="my-2 sd-exchange text-muted">
-                NASDAQ NMS - GLOBAL MARKET
+                {{rs.description.exchange}}
             </div>
             <div>
                 <button type="button sd-buy-button" class="btn btn-success" (click)="buyClicked()">Buy</button>
@@ -29,16 +29,17 @@
             </div> -->
         </div>
         <div class="col d-flex justify-content-center">
-            <img class="sd-logo h-50" src="https://finnhub.io/api/logo?symbol=TSLA">
+            <img class="sd-logo h-50" src={{rs.description.logo}}>
         </div>
         <div class="col">
-            <div class="sd-last-price h2 text-end text-success">785.23</div>
+            <div class="sd-last-price h2 text-end text-success">{{rs.quote.c}}</div>
             <div class="sd-change-line h4 text-end text-success">
                 <i class="bi bi-caret-up-fill"></i>
-                <span class="sd-change">21.19 (2.77%)</span>
+                <span class="sd-change">{{rs.quote.d.toFixed(2)}} ({{rs.quote.dp.toFixed(2)}}%)</span>
             </div>
             <div class="sd-timestamp text-end text-muted">
-                2022-02-24 12:16:35
+                {{rs.quote.th}}
+                <!-- 2022-02-24 12:16:35 -->
             </div>
         </div>
     </div>

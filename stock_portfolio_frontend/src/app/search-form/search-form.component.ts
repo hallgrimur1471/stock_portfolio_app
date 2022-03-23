@@ -35,7 +35,7 @@ export class SearchFormComponent implements OnInit {
     );
     this.autocompleteOptions$ = this.subscription$;
 
-    //this.search("TSLA") // TODO: remove
+    this.search("AAPL") // TODO: remove
   }
 
   handleEnterKeypress(ticker: string): void {
