@@ -31,6 +31,10 @@ import { ScrapyardComponent } from './scrapyard/scrapyard.component';
 import { StockDetailsComponent } from './stock-details/stock-details.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { StockTabsComponent } from './stock-tabs/stock-tabs.component';
+import { SummaryTabComponent } from './summary-tab/summary-tab.component';
+import { TopNewsTabComponent } from './top-news-tab/top-news-tab.component';
+import { ChartsTabComponent } from './charts-tab/charts-tab.component';
+import { InsightsTabComponent } from './insights-tab/insights-tab.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { StockTabsComponent } from './stock-tabs/stock-tabs.component';
     StockDetailsComponent,
     SearchFormComponent,
     StockTabsComponent,
+    SummaryTabComponent,
+    TopNewsTabComponent,
+    ChartsTabComponent,
+    InsightsTabComponent,
   ],
   imports: [
     BrowserModule,
