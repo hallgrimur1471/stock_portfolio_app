@@ -14,4 +14,8 @@ export class StockDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  buyClicked(): void {
+
+  }
+
 }
