@@ -38,9 +38,9 @@ app.get("/api/description", (req, res, next) => {
 // Company's Historical Data
 app.get("/api/historical", (req, res, next) => {
   let symbol = req.query.symbol;
-  let timeInterval = 1;
-  let from = 163102248; // Unix timestamp
-  let to = 1631627048; // Unix timestamp
+  let timeInterval = req.query.resolution; // Example: 1
+  let from = req.query.from; // Unix timestamp, example: 163102248
+  let to = req.query.to; // Unix timestamp, example: 1631627048
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${timeInterval}&from=${from}&to=${to}&token=${key}`;
 
