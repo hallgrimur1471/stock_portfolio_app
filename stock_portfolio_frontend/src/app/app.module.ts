@@ -15,6 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
 // ng-bootstrap
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// Other NPM packages
+import { HighchartsChartModule } from 'highcharts-angular';
+
 // Modules
 import { MaterialExampleModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -67,7 +70,8 @@ import { InsightsTabComponent } from './insights-tab/insights-tab.component';
     MaterialExampleModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    NgbModule
+    NgbModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
