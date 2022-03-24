@@ -12,11 +12,13 @@ export class SearchResultsService {
   quote: any = Object();
   quote_str: string = '{"c":935.74,"d":14.58,"dp":1.5828,"h":942.24,"l":921.75,"o":930,"pc":921.16,"t":1647961161}';
   peers: any = Object();
+  historical: any = Object();
+  historical_str: string = '';
   hasDescription: boolean = false;
   hasQuote: boolean = false;
   hasPeers: boolean = false;
+  hasHistoricalData: boolean = false;
   hasResults: boolean = false;
-  //hasResults = true;
 
   constructor(private api: ApiService) { }
 
@@ -30,6 +32,7 @@ export class SearchResultsService {
         this.hasDescription = true;
         this.updateHasResults();
       });
+
     this.api.getQuote(ticker)
       .subscribe(quote => {
         this.quote = quote;
@@ -38,12 +41,28 @@ export class SearchResultsService {
         this.hasQuote = true;
         this.updateHasResults();
       });
+
     this.api.getPeers(ticker)
       .subscribe(peers => {
         this.peers = peers;
         this.hasPeers = true;
         this.updateHasResults();
       });
+
+    let resolution: number = 5;
+    let to: any = Math.floor(Date.now() / 1000);
+    let from: any = new Date();
+    from.setHours(from.getHours() - 6);
+    from = Math.floor(from.getTime() / 1000);
+    //from = Math.floor(new Date(1631022248).getTime());
+    //to = Math.floor(new Date(1631627048).getTime());
+    this.api.getHistoricalData(ticker, resolution, from, to)
+      .subscribe(historical => {
+        this.historical = historical;
+        this.historical_str = JSON.stringify(historical);
+        this.hasHistoricalData = true;
+        this.updateHasResults();
+      })
   }
 
   private epoch2date(unix_epoch: number) {
@@ -63,11 +82,12 @@ export class SearchResultsService {
   private resetResults() {
     this.hasDescription = false;
     this.hasQuote = false;
+    this.hasHistoricalData = false;
     this.hasResults = false;
   }
 
   private updateHasResults() {
-    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers;
+    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalData;
   }
 
   // getDescription() {
