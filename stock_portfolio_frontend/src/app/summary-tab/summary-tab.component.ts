@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SearchResultsService } from '../search-results.service';
+
 @Component({
   selector: 'app-summary-tab',
   templateUrl: './summary-tab.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryTabComponent implements OnInit {
 
-  constructor() { }
+  constructor(public rs: SearchResultsService) { }
 
   ngOnInit(): void {
   }

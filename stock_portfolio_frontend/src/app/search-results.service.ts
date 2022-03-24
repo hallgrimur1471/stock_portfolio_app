@@ -11,8 +11,10 @@ export class SearchResultsService {
   description_str: string = '{"country":"US","currency":"USD","exchange":"NASDAQ NMS - GLOBAL MARKET","finnhubIndustry":"Automobiles","ipo":"2010-06-09","logo":"https://finnhub.io/api/logo?symbol=TSLA","marketCapitalization":935727.4,"name":"Tesla Inc","phone":"16506815000.0","shareOutstanding":1033.51,"ticker":"TSLA","weburl":"https://www.tesla.com/"}';
   quote: any = Object();
   quote_str: string = '{"c":935.74,"d":14.58,"dp":1.5828,"h":942.24,"l":921.75,"o":930,"pc":921.16,"t":1647961161}';
+  peers: any = Object();
   hasDescription: boolean = false;
   hasQuote: boolean = false;
+  hasPeers: boolean = false;
   hasResults: boolean = false;
   //hasResults = true;
 
@@ -27,7 +29,7 @@ export class SearchResultsService {
         this.description_str = JSON.stringify(description);
         this.hasDescription = true;
         this.updateHasResults();
-      })
+      });
     this.api.getQuote(ticker)
       .subscribe(quote => {
         this.quote = quote;
@@ -35,7 +37,13 @@ export class SearchResultsService {
         this.quote_str = JSON.stringify(quote);
         this.hasQuote = true;
         this.updateHasResults();
-      })
+      });
+    this.api.getPeers(ticker)
+      .subscribe(peers => {
+        this.peers = peers;
+        this.hasPeers = true;
+        this.updateHasResults();
+      });
   }
 
   private epoch2date(unix_epoch: number) {
@@ -59,7 +67,7 @@ export class SearchResultsService {
   }
 
   private updateHasResults() {
-    this.hasResults = this.hasDescription && this.hasQuote;
+    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers;
   }
 
   // getDescription() {

@@ -1,1 +1,49 @@
-<p>summary-tab works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col my-4">
+                    <p class="text-center">
+                        <span class="fw-bold">High Price: </span>
+                        <span>{{rs.quote.h}}</span>
+                    </p>
+                    <p class="text-center">
+                        <span class="fw-bold">Low Price: </span>
+                        <span>{{rs.quote.l}}</span>
+                    </p>
+                    <p class="text-center">
+                        <span class="fw-bold">Open Price: </span>
+                        <span>{{rs.quote.o}}</span>
+                    </p>
+                    <p class="text-center">
+                        <span class="fw-bold">Prev. Close: </span>
+                        <span>{{rs.quote.pc}}</span>
+                    </p>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row d-flex justify-content-center mb-4 fw-underline text-decoration-underline h5">
+                About the company
+            </div>
+            <div class="row d-flex justify-content-start">
+                <div class="my-2">
+                    <span class="fw-bold">IPO Start Date: </span>
+                    <span>{{rs.description.ipo}}</span>
+                </div>
+                <div class="my-2">
+                    <span class="fw-bold">Industry: </span>
+                    <span>{{rs.description.finnhubIndustry}}</span>
+                </div>
+                <div class="my-2">
+                    <span class="fw-bold">Webpage: </span>
+                    <span>{{rs.description.weburl}}</span>
+                </div>
+                <div class="my-2 fw-bold">Company peers: </div>
+                <div class="my-2">{{rs.peers}}</div>
+            </div>
+        </div>
+        <div class="col">
+            Second column
+        </div>
+    </div>
+</div>

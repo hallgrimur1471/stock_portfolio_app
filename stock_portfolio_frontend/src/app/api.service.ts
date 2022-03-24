@@ -45,6 +45,14 @@ export class ApiService {
         );
     }
 
+    getPeers(ticker: string): Observable<object> {
+        const url = `${this.apiUrl}/peers?symbol=${ticker}`;
+        return this.http.get<object>(url).pipe(
+            tap(_ => console.log(`fetched peers for ticker=${ticker}`)),
+            catchError(this.handleError<object>(`getPeers ticker=${ticker}`))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             // TODO: send the error to remote logging infrastructure
