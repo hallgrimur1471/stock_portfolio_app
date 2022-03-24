@@ -59,10 +59,15 @@ export class SearchResultsService {
     this.api.getHistoricalData(ticker, resolution, from, to)
       .subscribe(historical => {
         this.historical = historical;
+        this.historical.tc = this.getTC(this.historical.t, this.historical.c)
         this.historical_str = JSON.stringify(historical);
         this.hasHistoricalData = true;
         this.updateHasResults();
       })
+  }
+
+  private getTC(t: any, c: any) {
+    return t.map((t: any, i: any) => { return [t * 1000, c[i]] });
   }
 
   private epoch2date(unix_epoch: number) {
