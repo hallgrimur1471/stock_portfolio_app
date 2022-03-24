@@ -38,6 +38,7 @@ import { SummaryTabComponent } from './summary-tab/summary-tab.component';
 import { TopNewsTabComponent } from './top-news-tab/top-news-tab.component';
 import { ChartsTabComponent } from './charts-tab/charts-tab.component';
 import { InsightsTabComponent } from './insights-tab/insights-tab.component';
+import { SummaryChartComponent } from './summary-chart/summary-chart.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { InsightsTabComponent } from './insights-tab/insights-tab.component';
     TopNewsTabComponent,
     ChartsTabComponent,
     InsightsTabComponent,
+    SummaryChartComponent,
   ],
   imports: [
     BrowserModule,
