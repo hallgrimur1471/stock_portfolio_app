@@ -28,11 +28,7 @@ app.get("/api/description", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's Historical Data
@@ -44,11 +40,7 @@ app.get("/api/historical", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=${timeInterval}&from=${from}&to=${to}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's Latest Price of Stock
@@ -57,11 +49,7 @@ app.get("/api/quote", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // For search autocomplete functionality
@@ -70,11 +58,7 @@ app.get("/api/autocomplete", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/search?q=${symbol}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's News
@@ -85,11 +69,7 @@ app.get("/api/news", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=${from}&to=${to}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's Recommendation Trends
@@ -98,11 +78,7 @@ app.get("/api/trends", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/recommendation?symbol=${symbol}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's Social Sentiment
@@ -112,11 +88,7 @@ app.get("/api/social", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/social-sentiment?symbol=${symbol}&from=${from}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's Peers
@@ -125,11 +97,7 @@ app.get("/api/peers", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/peers?symbol=${symbol}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Company's Earnings
@@ -140,11 +108,7 @@ app.get("/api/earnings", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${key}`;
 
-  getFinnhub(url)
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(next);
+  getFinnhub(url, res);
 });
 
 // Start the server
@@ -154,7 +118,25 @@ app.listen(PORT, () => {
   console.log('Press Ctrl+C to quit.');
 });
 
-async function getFinnhub(url) {
+async function getFinnhub(url, res) {
+  _getFinnhub(url)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((statusCode) => {
+      if (statusCode) {
+        res.status(statusCode);
+        res.json({
+          error: `API call to Finnhub failed with status code ${statusCode}`
+        });
+      } else {
+        res.status(500);
+        res.json({ error: "Unexpected server error" });
+      }
+    });
+}
+
+async function _getFinnhub(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
       try {
@@ -175,7 +157,8 @@ async function getFinnhub(url) {
         });
 
       } catch (err) {
-        reject(err);
+        console.log(err.message);
+        reject(res.statusCode);
       }
     })
   });
