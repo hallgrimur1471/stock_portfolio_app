@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6 my-2" *ngFor="let x of rs.topNews">
-            <div class="card" style="height: 100%">
+        <div class="col-md-6 my-2" *ngFor="let x of rs.topNews; index as i">
+            <div class="card" style="height: 100%" (click)="openArticle(i)">
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-3">

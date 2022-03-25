@@ -39,6 +39,7 @@ import { TopNewsTabComponent } from './top-news-tab/top-news-tab.component';
 import { ChartsTabComponent } from './charts-tab/charts-tab.component';
 import { InsightsTabComponent } from './insights-tab/insights-tab.component';
 import { SummaryChartComponent } from './summary-chart/summary-chart.component';
+import { ArticleModalComponent } from './article-modal/article-modal.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { SummaryChartComponent } from './summary-chart/summary-chart.component';
     ChartsTabComponent,
     InsightsTabComponent,
     SummaryChartComponent,
+    ArticleModalComponent,
   ],
   imports: [
     BrowserModule,
