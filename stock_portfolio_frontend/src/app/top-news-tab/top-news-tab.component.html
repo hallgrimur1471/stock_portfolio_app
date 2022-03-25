@@ -1,1 +1,18 @@
-<p>top-news-tab works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 my-2" *ngFor="let x of rs.topNews">
+            <div class="card" style="height: 100%">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <img src="{{x.image}}" style="width: 100%" />
+                        </div>
+                        <div class="col-md-9">
+                            <p class="card-text">{{x.headline}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

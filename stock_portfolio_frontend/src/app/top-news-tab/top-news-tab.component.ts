@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SearchResultsService } from '../search-results.service';
+
 @Component({
   selector: 'app-top-news-tab',
   templateUrl: './top-news-tab.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopNewsTabComponent implements OnInit {
 
-  constructor() { }
+  constructor(public rs: SearchResultsService) { }
 
   ngOnInit(): void {
   }

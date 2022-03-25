@@ -61,6 +61,14 @@ export class ApiService {
         );
     }
 
+    getNews(ticker: string, from: string, to: string): Observable<object> {
+        const url = `${this.apiUrl}/news?symbol=${ticker}&from=${from}&to=${to}`;
+        return this.http.get<object>(url).pipe(
+            tap(_ => console.log(`fetched news data for ticker=${ticker}`)),
+            catchError(this.handleError<object>(`getNews ticker=${ticker}`))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             // TODO: send the error to remote logging infrastructure

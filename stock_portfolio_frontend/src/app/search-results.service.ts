@@ -14,10 +14,13 @@ export class SearchResultsService {
   peers: any = Object();
   historical: any = Object();
   historical_str: string = '';
+  news: any = Object();
+  topNews: any = Object();
   hasDescription: boolean = false;
   hasQuote: boolean = false;
   hasPeers: boolean = false;
   hasHistoricalData: boolean = false;
+  hasNews: boolean = false;
   hasResults: boolean = false;
 
   constructor(private api: ApiService) { }
@@ -63,7 +66,36 @@ export class SearchResultsService {
         this.historical_str = JSON.stringify(historical);
         this.hasHistoricalData = true;
         this.updateHasResults();
+      });
+
+    this.api.getNews(ticker, from, to)
+      .subscribe(news => {
+        this.news = news;
+        this.topNews = this.extractTopNews(this.news);
+        this.hasNews = true;
+        this.updateHasResults();
       })
+  }
+
+  private extractTopNews(news: any[]) {
+    let topNews: any[] = [];
+
+    let i = 0;
+    let populatedNews = 0;
+    while (populatedNews < 5) {
+      if (i >= news.length) {
+        break;
+      }
+
+      let x = news[i];
+      if (x.image && x.headline && x.datetime && x.url) {
+        topNews.push(x);
+        populatedNews += 1;
+      }
+      i += 1;
+    }
+
+    return topNews;
   }
 
   private getTC(t: any, c: any) {
@@ -87,12 +119,13 @@ export class SearchResultsService {
   private resetResults() {
     this.hasDescription = false;
     this.hasQuote = false;
-    this.hasHistoricalData = false;
+    this.hasHistoricalData = true; // TODO: set to false
+    this.hasNews = false;
     this.hasResults = false;
   }
 
   private updateHasResults() {
-    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalData;
+    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalData && this.hasNews;
   }
 
   // getDescription() {
