@@ -18,16 +18,15 @@
             <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{titleEncoded}}&url={{url}}"
                 target="_blank"><i class="fa-brands fa-twitter" href="https://www.google.com"
                     style="font-size: 2rem"></i></a>
-            <i class="fab fa-facebook-square ms-2" style="font-size: 2rem"></i>
-            <!-- <a href="{{fbshareCurrentPage(url)}}" target="_blank" alt="Share on Facebook"><i
-                    class="fab fa-facebook-square ms-2" style="font-size: 2rem"></i></a> -->
-            <!-- Your share button code -->
-            <!-- <div class="fb-share-button" data-href="{{url}}" data-layout="button_count">
-            </div> -->
+            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"
+                data-size="small" style="display: inline">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url}}&amp;src=sdkpreparse"
+                    class="fb-xfbml-parse-ignore">
+                    <i class="fab fa-facebook-square ms-2" style="font-size: 2rem"></i>
+                </a>
+            </div>
         </div>
     </div>
 </div>
-<!-- <div class="modal-footer">
-    <p>article-modal works!</p>
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-</div> -->
+<script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v13.0"></script>

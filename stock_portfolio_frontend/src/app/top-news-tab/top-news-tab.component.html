@@ -2,13 +2,15 @@
     <div class="row">
         <div class="col-md-6 my-2" *ngFor="let x of rs.topNews; index as i">
             <div class="card" style="height: 100%" (click)="openArticle(i)">
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-md-3">
-                            <img src="{{x.image}}" style="width: 100%" />
-                        </div>
-                        <div class="col-md-9">
-                            <p class="card-text">{{x.headline}}</p>
+                <div class="card-body my-auto">
+                    <div class="align-middle my-auto">
+                        <div class="row align-items-center">
+                            <div class="col-md-3 align-middle">
+                                <img src="{{x.image}}" style="width: 100%" />
+                            </div>
+                            <div class="col-md-9">
+                                <p class="card-text">{{x.headline}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>

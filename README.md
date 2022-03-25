@@ -22,7 +22,7 @@ ng serve
 
 ```
 sed -i 's/NODE_ENV=development/NODE_ENV=production/g' .env
-cd stock_porfolio_frontend
+cd stock_portfolio_frontend
 npm run build
 cd ..
 
