@@ -21,6 +21,11 @@ export class TopNewsTabComponent implements OnInit {
     console.log(`Opening article ${index} ...`);
 
     const modalRef = this.modalService.open(ArticleModalComponent);
-    modalRef.componentInstance.name = "World :)";
+    let x = this.rs.topNews[index];
+    modalRef.componentInstance.source = x.source;
+    modalRef.componentInstance.publishedDateUnix = x.datetime;
+    modalRef.componentInstance.title = x.headline;
+    modalRef.componentInstance.description = x.summary;
+    modalRef.componentInstance.url = x.url;
   }
 }

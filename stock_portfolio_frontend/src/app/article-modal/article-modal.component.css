@@ -1,0 +1,14 @@
+.btn-close:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* https://gist.github.com/ksloan/d1b9ace61fddd2356ebf */
+.fa-facebook, .fa-facebook-square {
+  color: #3b5998
+}
+
+/* https://gist.github.com/ksloan/d1b9ace61fddd2356ebf */
+.fa-twitter, .fa-twitter-square {
+  color: #00aced
+}

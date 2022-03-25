@@ -64,8 +64,8 @@ app.get("/api/autocomplete", (req, res, next) => {
 // Company's News
 app.get("/api/news", (req, res, next) => {
   let symbol = req.query.symbol;
-  let from = "2021-09-01"; // Date in YYYY-MM-DD
-  let to = "2021-09-09"; // Date in YYYY-MM-DD
+  let from = req.query.from; // Date in YYYY-MM-DD, example value: "2021-09-01"
+  let to = req.query.to; // Date in YYYY-MM-DD, example value: "2021-09-09"
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=${from}&to=${to}&token=${key}`;
 

@@ -68,13 +68,34 @@ export class SearchResultsService {
         this.updateHasResults();
       });
 
+    this.fetchNews(ticker);
+  }
+
+  private fetchNews(ticker: string) {
+    let date: any = new Date(Date.now());
+    console.log(date);
+    console.log(typeof date.getMonth());
+
+    let to_day: string = ('00' + date.getDate()).slice(-2);
+    let to_month: string = ('00' + (date.getMonth() + 1)).slice(-2);
+    let to_year: string = date.getFullYear();
+
+    date.setDate(date.getDate() - 7);
+
+    let from_day: string = ('00' + date.getDate()).slice(-2);
+    let from_month: string = ('00' + (date.getMonth() + 1)).slice(-2);
+    let from_year: string = date.getFullYear();
+
+    let to = `${to_year}-${to_month}-${to_day}`;
+    let from = `${from_year}-${from_month}-${from_day}`;
+
     this.api.getNews(ticker, from, to)
       .subscribe(news => {
         this.news = news;
         this.topNews = this.extractTopNews(this.news);
         this.hasNews = true;
         this.updateHasResults();
-      })
+      });
   }
 
   private extractTopNews(news: any[]) {
@@ -82,7 +103,7 @@ export class SearchResultsService {
 
     let i = 0;
     let populatedNews = 0;
-    while (populatedNews < 5) {
+    while (populatedNews < 20) {
       if (i >= news.length) {
         break;
       }

@@ -1,11 +1,33 @@
-<div class="modal-header">
-    <h4 class="modal-title">Hi there!</h4>
+<div class="modal-header pb-0 align-items-start">
+    <div class="modal-title">
+        <div class="h4 mb-0">{{source}}</div>
+        <p class="text-muted">{{publishedDate}}</p>
+    </div>
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
+<script language="javascript">
+</script>
 <div class="modal-body">
-    <p>Hello, {{name}}!</p>
+    <div class="h3 mb-0">{{title}}</div>
+    <p class="mb-0">{{description}}</p>
+    <div class="text-muted">For more details click <a href="{{url}}" target="_blank"
+            style="text-decoration: none;">here</a></div>
+    <div class="card mt-5" style="height: 100%">
+        <div class="card-body">
+            <div class="my-2">Share</div>
+            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text={{titleEncoded}}&url={{url}}"
+                target="_blank"><i class="fa-brands fa-twitter" href="https://www.google.com"
+                    style="font-size: 2rem"></i></a>
+            <i class="fab fa-facebook-square ms-2" style="font-size: 2rem"></i>
+            <!-- <a href="{{fbshareCurrentPage(url)}}" target="_blank" alt="Share on Facebook"><i
+                    class="fab fa-facebook-square ms-2" style="font-size: 2rem"></i></a> -->
+            <!-- Your share button code -->
+            <!-- <div class="fb-share-button" data-href="{{url}}" data-layout="button_count">
+            </div> -->
+        </div>
+    </div>
 </div>
-<div class="modal-footer">
+<!-- <div class="modal-footer">
     <p>article-modal works!</p>
     <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-</div>
+</div> -->
