@@ -1,1 +1,39 @@
-<p>insights-tab works!</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="h4 text-center mt-2">Social Sentiments</div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th scope="col" class="text-muted text-center table-secondary">{{rs.description.name}}</th>
+                        <th scope="col" class="text-muted text-center table-secondary">Reddit</th>
+                        <th scope="col" class="text-muted text-center table-secondary">Twitter</th>
+                    </tr>
+                    <tr>
+                        <th class="text-muted text-center table-secondary">Total Mentions</th>
+                        <th class="text-center table-default i-table-value">{{rs.sentiment.reddit[0].mention}}</th>
+                        <th class="text-center i-table-value">{{rs.sentiment.twitter[0].mention | number}}</th>
+                    </tr>
+                    <tr>
+                        <th class="text-muted text-center table-secondary">Positive Mentions</th>
+                        <th class="text-center i-table-value">{{rs.sentiment.reddit[0].positiveMention | number}}</th>
+                        <th class="text-center i-table-value">{{rs.sentiment.twitter[0].positiveMention | number}}</th>
+                    </tr>
+                    <tr>
+                        <th class="text-muted text-center table-secondary">Negative Mentions</th>
+                        <th class="text-center i-table-value">{{rs.sentiment.reddit[0].negativeMention | number}}</th>
+                        <th class="text-center i-table-value">{{rs.sentiment.twitter[0].negativeMention | number}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Col 1
+        </div>
+        <div class="col">
+            Col 2
+        </div>
+    </div>
+</div>

@@ -61,6 +61,14 @@ export class ApiService {
         );
     }
 
+    getSocialSentiment(ticker: string): Observable<object> {
+        const url = `${this.apiUrl}/social?symbol=${ticker}`;
+        return this.http.get<object>(url).pipe(
+            tap(_ => console.log(`fetched social sentiment data for ticker=${ticker}`)),
+            catchError(this.handleError<object>(`getSocialSentiment ticker=${ticker}`))
+        );
+    }
+
     getNews(ticker: string, from: string, to: string): Observable<object> {
         const url = `${this.apiUrl}/news?symbol=${ticker}&from=${from}&to=${to}`;
         return this.http.get<object>(url).pipe(

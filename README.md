@@ -28,6 +28,9 @@ npm run build
 cd ..
 
 gcloud app deploy
+
+# All in one line:
+sed -i 's/NODE_ENV=development/NODE_ENV=production/g' .env && (cd stock_portfolio_frontend && npm run build) && gcloud app deploy
 ```
 
 ## Additional gcloud commands

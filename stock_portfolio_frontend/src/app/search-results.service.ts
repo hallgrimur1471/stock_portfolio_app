@@ -15,6 +15,7 @@ export class SearchResultsService {
   historicalSummary: any = Object();
   historical_str: string = '';
   historicalChartsTab: any = Object();
+  sentiment: any = Object();
   news: any = Object();
   topNews: any = Object();
   hasDescription: boolean = false;
@@ -22,6 +23,7 @@ export class SearchResultsService {
   hasPeers: boolean = false;
   hasHistoricalSummary: boolean = false;
   hasHistoricalChartsTab: boolean = false;
+  hasSentiment: boolean = false;
   hasNews: boolean = false;
   hasResults: boolean = false;
 
@@ -56,7 +58,7 @@ export class SearchResultsService {
 
     this.fetchHistoricalSummary(ticker);
     this.fetchHistoricalChartsTab(ticker);
-
+    this.fetchSocialSentiment(ticker);
     this.fetchNews(ticker);
   }
 
@@ -90,6 +92,15 @@ export class SearchResultsService {
       .subscribe(historical => {
         this.historicalChartsTab = historical;
         this.hasHistoricalChartsTab = true;
+        this.updateHasResults();
+      });
+  }
+
+  private fetchSocialSentiment(ticker: string) {
+    this.api.getSocialSentiment(ticker)
+      .subscribe(sentiment => {
+        this.sentiment = sentiment;
+        this.hasSentiment = true;
         this.updateHasResults();
       });
   }
@@ -168,12 +179,13 @@ export class SearchResultsService {
     this.hasQuote = false;
     this.hasHistoricalSummary = false;
     this.hasHistoricalChartsTab = false;
+    this.hasSentiment = false;
     this.hasNews = false;
     this.hasResults = false;
   }
 
   private updateHasResults() {
-    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasNews;
+    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasSentiment && this.hasNews;
   }
 
   // getDescription() {
