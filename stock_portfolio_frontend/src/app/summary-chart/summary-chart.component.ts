@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { SearchResultsService } from '../search-results.service';
 
 import * as Highcharts from 'highcharts/highstock';
-import { left } from '@popperjs/core';
 
 @Component({
   selector: 'app-summary-chart',
@@ -11,6 +10,12 @@ import { left } from '@popperjs/core';
   styleUrls: ['./summary-chart.component.css']
 })
 export class SummaryChartComponent implements OnInit {
+
+  constructor(public rs: SearchResultsService) { }
+
+  ngOnInit(): void {
+  }
+
   Highcharts: typeof Highcharts = Highcharts; // required
   chartConstructor: string = 'stockChart'; // optional string, defaults to 'chart'
   chartOptions: Highcharts.Options = {
@@ -22,7 +27,7 @@ export class SummaryChartComponent implements OnInit {
       useHTML: true
     },
     series: [{
-      data: this.rs.historical.tc,
+      data: this.rs.historicalSummary.tc,
       type: 'line',
       showInLegend: false,
     }],
@@ -53,10 +58,4 @@ export class SummaryChartComponent implements OnInit {
   updateFlag: boolean = false; // optional boolean
   oneToOneFlag: boolean = true; // optional boolean, defaults to false
   runOutsideAngular: boolean = false; // optional boolean, defaults to false
-
-  constructor(public rs: SearchResultsService) { }
-
-  ngOnInit(): void {
-  }
-
 }

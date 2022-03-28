@@ -53,7 +53,7 @@ export class ApiService {
         );
     }
 
-    getHistoricalData(ticker: string, resolution: number, from: number, to: number): Observable<object> {
+    getHistoricalData(ticker: string, resolution: string, from: number, to: number): Observable<object> {
         const url = `${this.apiUrl}/historical?symbol=${ticker}&resolution=${resolution}&from=${from}&to=${to}`;
         return this.http.get<object>(url).pipe(
             tap(_ => console.log(`fetched historical data for ticker=${ticker}`)),

@@ -13,6 +13,7 @@ sed -i 's/NODE_ENV=production/NODE_ENV=development/g' .env
 npm run dev
 
 # Terminal 2:
+cd stock_portfolio_frontend
 ng serve
 
 # open http://localhost:4200

@@ -12,14 +12,16 @@ export class SearchResultsService {
   quote: any = Object();
   quote_str: string = '{"c":935.74,"d":14.58,"dp":1.5828,"h":942.24,"l":921.75,"o":930,"pc":921.16,"t":1647961161}';
   peers: any = Object();
-  historical: any = Object();
+  historicalSummary: any = Object();
   historical_str: string = '';
+  historicalChartsTab: any = Object();
   news: any = Object();
   topNews: any = Object();
   hasDescription: boolean = false;
   hasQuote: boolean = false;
   hasPeers: boolean = false;
-  hasHistoricalData: boolean = false;
+  hasHistoricalSummary: boolean = false;
+  hasHistoricalChartsTab: boolean = false;
   hasNews: boolean = false;
   hasResults: boolean = false;
 
@@ -52,23 +54,44 @@ export class SearchResultsService {
         this.updateHasResults();
       });
 
-    let resolution: number = 5;
+    this.fetchHistoricalSummary(ticker);
+    this.fetchHistoricalChartsTab(ticker);
+
+    this.fetchNews(ticker);
+  }
+
+  private fetchHistoricalSummary(ticker: string) {
+    let resolution: string = '5';
     let to: any = Math.floor(Date.now() / 1000);
     let from: any = new Date();
-    from.setHours(from.getHours() - 6);
+    let hoursWindow = 6;
+    from.setHours(from.getHours() - hoursWindow);
     from = Math.floor(from.getTime() / 1000);
     //from = Math.floor(new Date(1631022248).getTime());
     //to = Math.floor(new Date(1631627048).getTime());
     this.api.getHistoricalData(ticker, resolution, from, to)
       .subscribe(historical => {
-        this.historical = historical;
-        this.historical.tc = this.getTC(this.historical.t, this.historical.c)
+        this.historicalSummary = historical;
+        this.historicalSummary.tc = this.getTC(this.historicalSummary.t, this.historicalSummary.c)
         this.historical_str = JSON.stringify(historical);
-        this.hasHistoricalData = true;
+        this.hasHistoricalSummary = true;
         this.updateHasResults();
       });
+  }
 
-    this.fetchNews(ticker);
+  private fetchHistoricalChartsTab(ticker: string) {
+    let resolution: string = 'D';
+    let to: any = Math.floor(Date.now() / 1000);
+    let from: any = new Date();
+    let yearsWindow = 2;
+    from.setFullYear(from.getFullYear() - yearsWindow);
+    from = Math.floor(from.getTime() / 1000);
+    this.api.getHistoricalData(ticker, resolution, from, to)
+      .subscribe(historical => {
+        this.historicalChartsTab = historical;
+        this.hasHistoricalChartsTab = true;
+        this.updateHasResults();
+      });
   }
 
   private fetchNews(ticker: string) {
@@ -120,6 +143,9 @@ export class SearchResultsService {
   }
 
   private getTC(t: any, c: any) {
+    if (!t) {
+      return [];
+    }
     return t.map((t: any, i: any) => { return [t * 1000, c[i]] });
   }
 
@@ -140,13 +166,14 @@ export class SearchResultsService {
   private resetResults() {
     this.hasDescription = false;
     this.hasQuote = false;
-    this.hasHistoricalData = true; // TODO: set to false
+    this.hasHistoricalSummary = false;
+    this.hasHistoricalChartsTab = false;
     this.hasNews = false;
     this.hasResults = false;
   }
 
   private updateHasResults() {
-    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalData && this.hasNews;
+    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasNews;
   }
 
   // getDescription() {
