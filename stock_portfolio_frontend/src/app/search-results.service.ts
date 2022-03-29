@@ -19,6 +19,7 @@ export class SearchResultsService {
   news: any = Object();
   topNews: any = Object();
   trends: any = Object();
+  earnings: any[] = [];
   hasDescription: boolean = false;
   hasQuote: boolean = false;
   hasPeers: boolean = false;
@@ -27,6 +28,7 @@ export class SearchResultsService {
   hasSentiment: boolean = false;
   hasNews: boolean = false;
   hasTrends: boolean = false;
+  hasEarnings: boolean = false;
   hasResults: boolean = false;
 
   constructor(private api: ApiService) { }
@@ -42,6 +44,7 @@ export class SearchResultsService {
     this.fetchSocialSentiment(ticker);
     this.fetchNews(ticker);
     this.fetchTrends(ticker);
+    this.fetchCompanyEarnings(ticker);
   }
 
   private fetchDescription(ticker: string) {
@@ -153,6 +156,21 @@ export class SearchResultsService {
       });
   }
 
+  private fetchCompanyEarnings(ticker: string) {
+    this.api.getEarnings(ticker)
+      .subscribe(earnings => {
+        this.earnings = earnings.map((x: any) => {
+          x.actual = (x.actual === null) ? 0 : x.actual;
+          x.estimate = (x.estimate === null) ? 0 : x.estimate;
+          x.surprise = (x.surprise === null) ? 0 : x.surprise;
+          x.surprisePercent = (x.surprisePercent === null) ? 0 : x.surprisePercent;
+          return x;
+        });
+        this.hasEarnings = true;
+        this.updateHasResults();
+      })
+  }
+
   private extractTopNews(news: any[]) {
     let topNews: any[] = [];
 
@@ -202,11 +220,12 @@ export class SearchResultsService {
     this.hasHistoricalChartsTab = false;
     this.hasSentiment = false;
     this.hasNews = false;
+    this.hasEarnings = false;
     this.hasResults = false;
   }
 
   private updateHasResults() {
-    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasSentiment && this.hasNews;
+    this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasSentiment && this.hasNews && this.hasEarnings;
   }
 
   // getDescription() {

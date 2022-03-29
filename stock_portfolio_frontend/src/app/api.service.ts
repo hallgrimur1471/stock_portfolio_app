@@ -85,6 +85,14 @@ export class ApiService {
         );
     }
 
+    getEarnings(ticker: string): Observable<any[]> {
+        const url = `${this.apiUrl}/earnings?symbol=${ticker}`;
+        return this.http.get<any[]>(url).pipe(
+            tap(_ => console.log(`fetched earnings data for ticker=${ticker}`)),
+            catchError(this.handleError<any[]>(`getEarnings ticker=${ticker}`))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             // TODO: send the error to remote logging infrastructure

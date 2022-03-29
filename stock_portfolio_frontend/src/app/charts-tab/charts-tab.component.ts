@@ -52,12 +52,8 @@ export class ChartsTabComponent implements OnInit {
 
   ngOnInit(): void {
     let h = this.rs.historicalChartsTab;
-    console.log(h);
     this.ohlc = this.getOhlc(h.t, h.o, h.h, h.l, h.c);
-    console.log(this.ohlc);
-    console.log(`ohlc length: ${this.ohlc.length}`);
     this.volume = this.getVolume(h.t, h.v);
-    console.log(`volume length: ${this.volume.length}`);
 
     this.chartOptions = {
 
