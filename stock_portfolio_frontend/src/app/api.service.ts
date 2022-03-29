@@ -77,6 +77,14 @@ export class ApiService {
         );
     }
 
+    getTrends(ticker: string): Observable<object> {
+        const url = `${this.apiUrl}/trends?symbol=${ticker}`;
+        return this.http.get<object>(url).pipe(
+            tap(_ => console.log(`fetched trends data for ticker=${ticker}`)),
+            catchError(this.handleError<object>(`getTrends ticker=${ticker}`))
+        );
+    }
+
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
             // TODO: send the error to remote logging infrastructure

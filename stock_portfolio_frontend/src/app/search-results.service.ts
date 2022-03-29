@@ -18,6 +18,7 @@ export class SearchResultsService {
   sentiment: any = Object();
   news: any = Object();
   topNews: any = Object();
+  trends: any = Object();
   hasDescription: boolean = false;
   hasQuote: boolean = false;
   hasPeers: boolean = false;
@@ -25,6 +26,7 @@ export class SearchResultsService {
   hasHistoricalChartsTab: boolean = false;
   hasSentiment: boolean = false;
   hasNews: boolean = false;
+  hasTrends: boolean = false;
   hasResults: boolean = false;
 
   constructor(private api: ApiService) { }
@@ -32,6 +34,17 @@ export class SearchResultsService {
   fetchResultsFor(ticker: string) {
     this.resetResults();
 
+    this.fetchDescription(ticker);
+    this.fetchQuote(ticker);
+    this.fetchPeers(ticker);
+    this.fetchHistoricalSummary(ticker);
+    this.fetchHistoricalChartsTab(ticker);
+    this.fetchSocialSentiment(ticker);
+    this.fetchNews(ticker);
+    this.fetchTrends(ticker);
+  }
+
+  private fetchDescription(ticker: string) {
     this.api.getDescription(ticker)
       .subscribe(description => {
         this.description = description;
@@ -39,7 +52,9 @@ export class SearchResultsService {
         this.hasDescription = true;
         this.updateHasResults();
       });
+  }
 
+  private fetchQuote(ticker: string) {
     this.api.getQuote(ticker)
       .subscribe(quote => {
         this.quote = quote;
@@ -48,18 +63,15 @@ export class SearchResultsService {
         this.hasQuote = true;
         this.updateHasResults();
       });
+  }
 
+  private fetchPeers(ticker: string) {
     this.api.getPeers(ticker)
       .subscribe(peers => {
         this.peers = peers;
         this.hasPeers = true;
         this.updateHasResults();
       });
-
-    this.fetchHistoricalSummary(ticker);
-    this.fetchHistoricalChartsTab(ticker);
-    this.fetchSocialSentiment(ticker);
-    this.fetchNews(ticker);
   }
 
   private fetchHistoricalSummary(ticker: string) {
@@ -128,6 +140,15 @@ export class SearchResultsService {
         this.news = news;
         this.topNews = this.extractTopNews(this.news);
         this.hasNews = true;
+        this.updateHasResults();
+      });
+  }
+
+  private fetchTrends(ticker: string) {
+    this.api.getTrends(ticker)
+      .subscribe(trends => {
+        this.trends = trends;
+        this.hasTrends = true;
         this.updateHasResults();
       });
   }

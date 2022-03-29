@@ -2,33 +2,26 @@ import { Component, OnInit } from '@angular/core';
 
 import { SearchResultsService } from '../search-results.service';
 
-// import * as Highcharts from 'highcharts/highstock';
-
+// Highstock
 import * as Highcharts from 'highcharts';
 import HC_stock from 'highcharts/modules/stock';
 HC_stock(Highcharts);
 
-
+// HC Modules
 import HC_data from 'highcharts/modules/data';
-HC_data(Highcharts);
 import HC_dragPanes from 'highcharts/modules/drag-panes';
-HC_dragPanes(Highcharts);
 import HC_exporting from 'highcharts/modules/exporting';
+HC_data(Highcharts);
+HC_dragPanes(Highcharts);
 HC_exporting(Highcharts);
 
-
+// HC Indicators
 import IndicatorsCore from "highcharts/indicators/indicators";
 import IndicatorZigzag from "highcharts/indicators/zigzag";
+import HC_Volume from 'highcharts/indicators/volume-by-price';
 IndicatorsCore(Highcharts);
 IndicatorZigzag(Highcharts);
-import HC_Volume from 'highcharts/indicators/volume-by-price';
 HC_Volume(Highcharts);
-
-// import HC_stock from 'highcharts/modules/stock';
-// HC_stock(Highcharts);
-
-// 2 years of data
-// resolution: 'D'
 
 @Component({
   selector: 'app-charts-tab',
@@ -36,6 +29,13 @@ HC_Volume(Highcharts);
   styleUrls: ['./charts-tab.component.css']
 })
 export class ChartsTabComponent implements OnInit {
+  Highcharts: typeof Highcharts = Highcharts; // required
+  chartConstructor: string = 'stockChart'; // optional string, defaults to 'chart'
+  chartOptions: Highcharts.Options = {};
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
+  updateFlag: boolean = false; // optional boolean
+  oneToOneFlag: boolean = false; // optional boolean, defaults to false
+  runOutsideAngular: boolean = false; // optional boolean, defaults to false
 
   groupingUnits: any = [[
     'week',                         // unit name
@@ -161,12 +161,4 @@ export class ChartsTabComponent implements OnInit {
       return [t * 1000, v[i]];
     })
   }
-
-  Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor: string = 'stockChart'; // optional string, defaults to 'chart'
-  chartOptions: Highcharts.Options = {};
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
-  updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = false; // optional boolean, defaults to false
-  runOutsideAngular: boolean = false; // optional boolean, defaults to false
 }
