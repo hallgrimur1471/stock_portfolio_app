@@ -40,6 +40,8 @@ import { ChartsTabComponent } from './charts-tab/charts-tab.component';
 import { InsightsTabComponent } from './insights-tab/insights-tab.component';
 import { SummaryChartComponent } from './summary-chart/summary-chart.component';
 import { ArticleModalComponent } from './article-modal/article-modal.component';
+import { ColumnChartComponent } from './column-chart/column-chart.component';
+import { SplineChartComponent } from './spline-chart/spline-chart.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { ArticleModalComponent } from './article-modal/article-modal.component';
     InsightsTabComponent,
     SummaryChartComponent,
     ArticleModalComponent,
+    ColumnChartComponent,
+    SplineChartComponent,
   ],
   imports: [
     BrowserModule,
