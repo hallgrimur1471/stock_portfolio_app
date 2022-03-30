@@ -1,3 +1,14 @@
 .search-form-container {
     padding: 1rem;
 }
+
+.sf-input {
+    border-style: none;
+    /* padding: 0px; */
+}
+
+.sf-input:focus {
+    outline: none !important;
+    border-style: none !important;
+    box-shadow: none;
+}
