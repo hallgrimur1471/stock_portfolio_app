@@ -31,4 +31,7 @@
             </div>
         </div>
     </div>
+    <ng-container *ngIf="!rs.success">
+        <ngb-alert [type]="error.type">{{error.message}}</ngb-alert>
+    </ng-container>
 </div>

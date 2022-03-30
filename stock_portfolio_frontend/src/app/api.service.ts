@@ -29,7 +29,7 @@ export class ApiService {
         //);
     }
 
-    getDescription(ticker: string): Observable<object> {
+    getDescription(ticker: string): Observable<any> {
         const url = `${this.apiUrl}/description?symbol=${ticker}`;
         return this.http.get<object>(url).pipe(
             tap(_ => console.log(`fetched description for ticker=${ticker}`)),

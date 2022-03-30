@@ -30,13 +30,16 @@ export class SearchResultsService {
   hasTrends: boolean = false;
   hasEarnings: boolean = false;
   hasResults: boolean = false;
+  success: boolean = true;
 
   constructor(private api: ApiService) { }
 
   fetchResultsFor(ticker: string) {
     this.resetResults();
-
     this.fetchDescription(ticker);
+  }
+
+  private fetchRest(ticker: string) {
     this.fetchQuote(ticker);
     this.fetchPeers(ticker);
     this.fetchHistoricalSummary(ticker);
@@ -50,10 +53,16 @@ export class SearchResultsService {
   private fetchDescription(ticker: string) {
     this.api.getDescription(ticker)
       .subscribe(description => {
-        this.description = description;
-        this.description_str = JSON.stringify(description);
-        this.hasDescription = true;
-        this.updateHasResults();
+        if (description && description.ticker) {
+          this.success = true;
+          this.description = description;
+          this.description_str = JSON.stringify(description);
+          this.hasDescription = true;
+          this.updateHasResults();
+          this.fetchRest(ticker);
+        } else {
+          this.success = false;
+        }
       });
   }
 
@@ -222,20 +231,11 @@ export class SearchResultsService {
     this.hasNews = false;
     this.hasEarnings = false;
     this.hasResults = false;
+    this.success = true;
   }
 
   private updateHasResults() {
+    //this.hasResults = this.hasDescription;
     this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasSentiment && this.hasNews && this.hasEarnings;
   }
-
-  // getDescription() {
-  //   return this.description
-  // }
-  // getDescription() {
-  //   this.apiService.getDescription("TSLA")
-  //     .subscribe(desc => {
-  //       this.description = desc;
-  //       this.description_str = JSON.stringify(desc);
-  //     });
-  // }
 }

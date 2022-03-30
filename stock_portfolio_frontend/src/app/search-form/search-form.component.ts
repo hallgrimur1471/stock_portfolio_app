@@ -7,6 +7,11 @@ import { debounceTime, map, switchMap, tap, startWith, distinctUntilChanged } fr
 import { ApiService } from '../api.service';
 import { SearchResultsService } from '../search-results.service';
 
+interface Alert {
+  type: string;
+  message: string;
+}
+
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
@@ -17,6 +22,20 @@ export class SearchFormComponent implements OnInit {
   autocompleteOptions$!: Observable<any[]>;
   subscription$!: Observable<any[]>;
   loading = false;
+  // isDisplayError: boolean = false;
+  error: Alert = {
+    type: "danger",
+    message: ""
+  };
+
+  // closeError() {
+  //   this.isDisplayError = false;
+  // }
+
+  // private displayError(msg: string) {
+  //   this.error.message = msg;
+  //   // this.isDisplayError = true;
+  // }
 
   constructor(
     private apiService: ApiService,
@@ -35,7 +54,7 @@ export class SearchFormComponent implements OnInit {
     );
     this.autocompleteOptions$ = this.subscription$;
 
-    this.search("TSLA") // TODO: remove
+    //this.search("TSLA") // TODO: remove
   }
 
   handleEnterKeypress(ticker: string): void {
@@ -46,6 +65,18 @@ export class SearchFormComponent implements OnInit {
   }
 
   search(ticker: string): void {
+    this.error = {
+      type: "danger",
+      message: ""
+    };
+    if (ticker.length == 0) {
+      this.rs.success = false;
+      this.error.message = "Please enter a valid ticker";
+      return;
+    } else {
+      this.rs.success = false;
+      this.error.message = "No data found. Please enter a valid Ticker";
+    }
     console.log(`searching for ${ticker}...`)
     this.rs.fetchResultsFor(ticker);
   }
