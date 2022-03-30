@@ -1,49 +1,33 @@
-<div class="container search-form-container">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-8 d-flex justify-content-center" style="border-bottom: solid; border-width: 1px">
-            <form class="example-form">
-                <mat-form-field class=" example-full-width" appearance="fill">
-                    <mat-label>Enter stock ticker symbol</mat-label>
-                    <input #searchBox type="text" placeholder="" aria-label="Stock ticker symbol" matInput
-                        [formControl]="control" [matAutocomplete]="auto"
-                        (keydown.enter)="handleEnterKeypress(searchBox.value)"
-                        oninput="this.value = this.value.toUpperCase()">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option disabled class="loading" *ngIf="loading">
-                            <mat-spinner diameter="40"></mat-spinner>
-                        </mat-option>
-                        <mat-option *ngFor="let option of autocompleteOptions$ | async" [value]="option"
-                            (click)="search(option)">
-                            {{option}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-                <button mat-button style="margin-left: 20px" (click)="search(searchBox.value)">Search</button>
-                <button mat-button style="margin-left: 20px"
-                    (click)="searchBox.value=''; clearSearchResults()">Clear</button>
-            </form>
-        </div>
-    </div>
-</div>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-6 col-9">
+        <div class="col-lg-3 col-9">
             <div class="h2 text-center my-4">STOCK SEARCH</div>
             <div class="input-group mb-5 border border-3 rounded-pill align-items-center"
                 style="border-color: #2224ab !important">
-                <input class="form-control form-control-sm mx-2 my-1 sf-input" type="text"
-                    placeholder="Enter stock ticker symbol" />
+                <input class="form-control form-control-sm mx-2 my-1 sf-input" #searchBox type="text"
+                    placeholder="Enter stock ticker symbol" [formControl]="control" [matAutocomplete]="auto"
+                    (keydown.enter)="handleEnterKeypress(searchBox.value)"
+                    oninput="this.value = this.value.toUpperCase()" />
                 <div class="input-group-append">
-                    <button type="button" class="btn btn-sm">
+                    <button type="button" class="btn btn-sm" (click)="search(searchBox.value)">
                         <i class="fa fa-search" style="color: #2224ab"></i>
                     </button>
                 </div>
                 <div class="input-group-append">
-                    <button type="button" class="btn btn-sm"
+                    <button type="button" class="btn btn-sm" (click)="searchBox.value=''; clearSearchResults()"
                         style="margin-right: 15px; margin-left: 5px; padding: 0px;">
                         <i class="bi bi-x" style="color: #2224ab; font-size: 1.3rem;"></i>
                     </button>
                 </div>
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option disabled class="loading" *ngIf="loading">
+                        <mat-spinner diameter="40"></mat-spinner>
+                    </mat-option>
+                    <mat-option *ngFor="let option of autocompleteOptions$ | async" [value]="option"
+                        (click)="search(option)">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
             </div>
         </div>
     </div>

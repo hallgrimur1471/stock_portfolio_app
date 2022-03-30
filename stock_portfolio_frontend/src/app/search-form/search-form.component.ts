@@ -42,7 +42,7 @@ export class SearchFormComponent implements OnInit {
     console.log("handling enter...")
     this.loading = false;
     // this.autocompleteOptions$ = this.subscription$;
-    // this.search(ticker);
+    this.search(ticker);
   }
 
   search(ticker: string): void {
