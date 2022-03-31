@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -7,11 +8,29 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./buy-modal.component.css']
 })
 export class BuyModalComponent implements OnInit {
-  @Input() name: string = "";
+  @Input() ticker: string = "";
+  @Input() currentPrice: number = 0;
+  @Input() moneyInWallet: number = 0;
+  @Input() isBuy: boolean = true;
+  @Input() ownedQuantity: number = 0;
+  quantity: number = 0;
 
   constructor(public activeModal: NgbActiveModal) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+
   }
 
+  buySell(): void {
+    this.isBuy ? this.buy() : this.sell();
+  }
+
+  buy(): void {
+    console.log("Buy")
+  }
+
+  sell(): void {
+    console.log("Sell")
+
+  }
 }

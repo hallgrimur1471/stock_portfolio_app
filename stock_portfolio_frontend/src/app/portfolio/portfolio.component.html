@@ -1,5 +1,11 @@
+<ngb-alert #sellAlert *ngIf="sellAlertMessage" type="danger" (closed)="sellAlertMessage = ''" class="mt-4">{{
+    sellAlertMessage }}
+</ngb-alert>
+<ngb-alert #buyAlert *ngIf="buyAlertMessage" type="success" (closed)="buyAlertMessage = ''" class="mt-4">{{
+    buyAlertMessage }}
+</ngb-alert>
 <div class="h3 my-5">My Portfolio</div>
-<div class="h4">Money in Wallet: {{portfolio.money}}</div>
+<div class="h4">Money in Wallet: ${{portfolio.money}}</div>
 <div *ngFor="let share of portfolio.shares; index as i">
     <div class="card my-3">
         <div class="card-header">
@@ -27,10 +33,10 @@
                         <span class="my-0">Change:</span>
                         <span class="my-0 float-end">
                             <span *ngIf="share.change > 0">
-                                <i class="bi bi-caret-up-fill"></i>
+                                <i class="bi bi-caret-up-fill text-success"></i>
                             </span>
                             <span *ngIf="share.change < 0">
-                                <i class="bi bi-caret-down-fill"></i>
+                                <i class="bi bi-caret-down-fill text-danger"></i>
                             </span>
                             <span
                                 [ngClass]="{'text-success': share.change > 0, 'text-danger': share.change < 0}">{{share.change
@@ -58,8 +64,8 @@
             </div>
         </div>
         <div class="card-footer text-end">
-            <button type="button" class="btn btn-primary me-2">Buy</button>
-            <button type="button" class="btn btn-danger mx-2">Sell</button>
+            <button type="button" class="btn btn-primary me-2" (click)="openBuyModal(i)">Buy</button>
+            <button type="button" class="btn btn-danger mx-2" (click)="openSellModal(i)">Sell</button>
         </div>
     </div>
 </div>

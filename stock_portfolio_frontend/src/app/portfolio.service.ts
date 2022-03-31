@@ -56,7 +56,8 @@ export class PortfolioService {
   private updatePortfolio(p: Portfolio): Portfolio {
     p.shares.map(
       (s) => {
-        s.currentPrice = 100000;
+        //s.currentPrice = 100000;
+        s;
       }
     )
     return p;

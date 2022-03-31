@@ -1,11 +1,45 @@
 <div class="modal-header">
-    <h4 class="modal-title">Hi there!</h4>
+    <div class="modal-title">{{ticker}}</div>
     <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
 </div>
 <div class="modal-body">
-    <p>Hello, {{name}}!</p>
+    <div class="container">
+        <p>Current Price: {{currentPrice | number:'1.2-2'}}</p>
+        <p>Money in Wallet: ${{moneyInWallet | number:'1.2-2'}}</p>
+        <div class="row">
+            <div class="col-8">
+                <div class="input-group">
+                    <label for="quantity" class="my-auto">Quantity</label>
+                    <input class="ms-2 form-control form-control-sm" [(ngModel)]="quantity" type="number" id="quantity"
+                        name="quantity" step="1" value="0" ngbAutofocus min="0">
+
+                </div>
+            </div>
+        </div>
+        <div *ngIf="isBuy">
+            <div *ngIf="quantity * currentPrice > moneyInWallet">
+                <p class="text-danger mt-3">Not enough money in wallet!</p>
+            </div>
+        </div>
+        <div *ngIf="!isBuy">
+            <div *ngIf="quantity > ownedQuantity">
+                <p class="text-danger mt-3">You cannot sell the stocks that you don't have!</p>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="modal-footer">
-    <p>buy-modal works!</p>
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+<div class="modal-footer justify-content-between">
+    <p class="text-start align-self-start my-auto">Total : {{quantity * currentPrice | number:'1.2-2'}}</p>
+    <div *ngIf="isBuy">
+        <button type="button" class="btn btn-success align-self-end"
+            [attr.disabled]="quantity < 1 || quantity * currentPrice > moneyInWallet ? '' : null"
+            (click)="activeModal.close('Submitted click')">Buy
+        </button>
+    </div>
+    <div *ngIf="!isBuy">
+        <button type="button" class="btn btn-success align-self-end"
+            [attr.disabled]="quantity < 1 || quantity > ownedQuantity ? '' : null"
+            (click)="activeModal.close('Submitted click')">Sell
+        </button>
+    </div>
 </div>
