@@ -14,7 +14,7 @@
                 <div class="col-md-6 text-end"
                     [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
                     <div class="h4 text-end">
-                        {{w.currentPrice}}
+                        {{w.currentPrice | number}}
                     </div>
                     <div class="h6 text-end"
                         [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
