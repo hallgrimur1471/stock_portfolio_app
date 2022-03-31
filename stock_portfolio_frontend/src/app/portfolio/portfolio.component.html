@@ -1,1 +1,65 @@
-<p>portfolio works!</p>
+<div class="h3 my-5">My Portfolio</div>
+<div class="h4">Money in Wallet: {{portfolio.money}}</div>
+<div *ngFor="let share of portfolio.shares; index as i">
+    <div class="card my-3">
+        <div class="card-header">
+            <span class="h3">{{share.ticker}}</span>
+            <span class="text-muted ms-2">{{share.name}}</span>
+        </div>
+        <div class="card-body pt-0">
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div>
+                        <span class="my-0">Quantity:</span><span class="my-0 float-end">{{share.quantity |
+                            number:'1.2-2'}}</span>
+                    </div>
+                    <div>
+                        <span class="my-0">Avg. Cost / Share:</span><span class="my-0 float-end">{{share.avgCost |
+                            number:'1.2-2'}}</span>
+                    </div>
+                    <div>
+                        <span class="my-0">Total Cost:</span><span class="my-0 float-end">{{share.totalCost |
+                            number:'1.2-2'}}</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <span class="my-0">Change:</span>
+                        <span class="my-0 float-end">
+                            <span *ngIf="share.change > 0">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </span>
+                            <span *ngIf="share.change < 0">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </span>
+                            <span
+                                [ngClass]="{'text-success': share.change > 0, 'text-danger': share.change < 0}">{{share.change
+                                | number:'1.2-2'}}</span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="my-0">Current price:</span>
+                        <span class="my-0 float-end"
+                            [ngClass]="{'text-success': share.change > 0, 'text-danger': share.change < 0}">{{share.currentPrice
+                            |
+                            number:'1.2-2'}}</span>
+                    </div>
+                    <div>
+                        <span class="my-0">Market Value:</span>
+                        <span class="my-0 float-end"
+                            [ngClass]="{'text-success': share.change > 0, 'text-danger': share.change < 0}">{{share.marketValue
+                            |
+                            number:'1.2-2'}}</span>
+                    </div>
+                </div>
+                <div class="col-3 text-end"
+                    [ngClass]="{'text-success': share.change > 0, 'text-danger': share.change < 0}">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="button" class="btn btn-primary me-2">Buy</button>
+            <button type="button" class="btn btn-danger mx-2">Sell</button>
+        </div>
+    </div>
+</div>
