@@ -31,9 +31,9 @@
         <div class="col d-flex justify-content-center">
             <img class="sd-logo h-50" src={{rs.description.logo}}>
         </div>
-        <div class="col">
-            <div class="sd-last-price h2 text-end text-success">{{rs.quote.c}}</div>
-            <div class="sd-change-line h4 text-end text-success">
+        <div class="col" [ngClass]="{'text-success': rs.quote.dp > 0, 'text-danger': rs.quote.dp < 0}">
+            <div class="sd-last-price h2 text-end">{{rs.quote.c}}</div>
+            <div class="sd-change-line h4 text-end">
                 <i class="bi bi-caret-up-fill"></i>
                 <span class="sd-change">{{rs.quote.d.toFixed(2)}} ({{rs.quote.dp.toFixed(2)}}%)</span>
             </div>
