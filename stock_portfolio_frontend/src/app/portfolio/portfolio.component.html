@@ -63,3 +63,8 @@
         </div>
     </div>
 </div>
+<div *ngIf="portfolio.shares.length === 0">
+    <ngb-alert class="text-center" [dismissible]="false">
+        Currently you don't have any stock.
+    </ngb-alert>
+</div>

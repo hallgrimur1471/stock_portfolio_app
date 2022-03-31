@@ -18,7 +18,12 @@
                     </div>
                     <div class="h6 text-end"
                         [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
-                        <i class="bi bi-caret-up-fill"></i>
+                        <span *ngIf="w.changeInPricePercentage > 0">
+                            <i class="bi bi-caret-up-fill"></i>
+                        </span>
+                        <span *ngIf="w.changeInPricePercentage < 0">
+                            <i class="bi bi-caret-down-fill"></i>
+                        </span>
                         <span class="sd-change">{{w.changeInPrice.toFixed(2)}}
                             ({{w.changeInPricePercentage.toFixed(2)}}%)</span>
                     </div>
