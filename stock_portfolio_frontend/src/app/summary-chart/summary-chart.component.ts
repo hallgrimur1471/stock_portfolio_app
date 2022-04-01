@@ -30,6 +30,7 @@ export class SummaryChartComponent implements OnInit {
         useHTML: true
       },
       series: [{
+        name: this.rs.description.ticker,
         data: this.rs.historicalSummary.tc,
         type: 'line',
         showInLegend: false,

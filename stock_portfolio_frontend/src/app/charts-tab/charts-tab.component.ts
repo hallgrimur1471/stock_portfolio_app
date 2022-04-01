@@ -112,7 +112,7 @@ export class ChartsTabComponent implements OnInit {
 
       series: [{
         type: 'candlestick',
-        name: 'mainSeries',
+        name: this.rs.description.ticker,
         id: 'mainSeries',
         zIndex: 2,
         data: this.ohlc
