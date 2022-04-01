@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Observable, of, Subject } from 'rxjs';
 import { debounceTime, map, switchMap, tap, startWith, distinctUntilChanged } from 'rxjs/operators';
@@ -29,7 +30,8 @@ export class SearchFormComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    public rs: SearchResultsService
+    public rs: SearchResultsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +56,9 @@ export class SearchFormComponent implements OnInit {
   }
 
   search(ticker: string): void {
+    ticker = ticker.toUpperCase().trim();
+    this.router.navigateByUrl(`/search/${ticker}`);
+
     this.error = {
       type: "danger",
       message: ""

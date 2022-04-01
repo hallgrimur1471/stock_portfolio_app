@@ -37,7 +37,7 @@ Roadmap:
 [x] watchlist & portfolio operations from search page
 [x] watchlist & portfolio use local storage
 [x] loading on search
-[] fix routing logic & implement clickable watchlist & portfolio entries
+[x] fix routing logic & implement clickable watchlist & portfolio entries & company peers
 [] add footer
 [] auto update
 [] show results even if all APIs don't respond

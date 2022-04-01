@@ -5,31 +5,33 @@
             <button type="button" class="btn-close btn btn-sm" aria-label="Close"
                 style="font-size: 0.5rem; padding-right: 8px" (click)="removeFromWatchlist(i)"></button>
         </div>
-        <div class="card-body pt-0">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="h4">{{w.ticker}}</p>
-                    <p class="h6">{{w.name}}</p>
-                </div>
-                <div class="col-md-6 text-end"
-                    [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
-                    <div class="h4 text-end">
-                        {{w.currentPrice | number}}
+        <a class="" routerLink="/search/{{w.ticker}}">
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="h4">{{w.ticker}}</p>
+                        <p class="h6">{{w.name}}</p>
                     </div>
-                    <div class="h6 text-end"
+                    <div class="col-md-6 text-end"
                         [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
-                        <span *ngIf="w.changeInPricePercentage > 0">
-                            <i class="bi bi-caret-up-fill"></i>
-                        </span>
-                        <span *ngIf="w.changeInPricePercentage < 0">
-                            <i class="bi bi-caret-down-fill"></i>
-                        </span>
-                        <span class="sd-change">{{w.changeInPrice.toFixed(2)}}
-                            ({{w.changeInPricePercentage.toFixed(2)}}%)</span>
+                        <div class="h4 text-end">
+                            {{w.currentPrice | number}}
+                        </div>
+                        <div class="h6 text-end"
+                            [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
+                            <span *ngIf="w.changeInPricePercentage > 0">
+                                <i class="bi bi-caret-up-fill"></i>
+                            </span>
+                            <span *ngIf="w.changeInPricePercentage < 0">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </span>
+                            <span class="sd-change">{{w.changeInPrice.toFixed(2)}}
+                                ({{w.changeInPricePercentage.toFixed(2)}}%)</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 <div *ngIf="watchlist.length === 0">

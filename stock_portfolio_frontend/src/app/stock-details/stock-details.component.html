@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="col d-flex justify-content-center">
-            <img class="sd-logo h-50" src={{rs.description.logo}}>
+            <img class="sd-logo h-50" src={{rs.description.logo}} style="max-height:200px">
         </div>
         <div class="col" [ngClass]="{'text-success': rs.quote.dp > 0, 'text-danger': rs.quote.dp < 0}">
             <div class="sd-last-price h2 text-end">{{rs.quote.c}}</div>

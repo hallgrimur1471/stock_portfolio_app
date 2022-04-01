@@ -36,10 +36,14 @@
                 </div>
                 <div class="my-2">
                     <span class="fw-bold">Webpage: </span>
-                    <span>{{rs.description.weburl}}</span>
+                    <a href="{{rs.description.weburl}}" target="_blank"
+                        style="text-decoration:none">{{rs.description.weburl}}</a>
                 </div>
                 <div class="my-2 fw-bold">Company peers: </div>
-                <div class="my-2">{{rs.peers}}</div>
+                <div>
+                    <a class="my-2" *ngFor="let p of this.rs.peers" href="/search/{{p}}"
+                        style="text-decoration:none">{{p}}, </a>
+                </div>
             </div>
         </div>
         <div class="col-6">
