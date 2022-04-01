@@ -1,5 +1,6 @@
 <div class="container">
     <app-search-form></app-search-form>
+    <mat-spinner *ngIf="rs.isLoading" diameter="40" class="mt-5 mx-auto"></mat-spinner>
     <ng-container *ngIf="rs.hasResults">
         <app-stock-details></app-stock-details>
         <app-stock-tabs></app-stock-tabs>

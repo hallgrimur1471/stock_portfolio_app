@@ -31,10 +31,12 @@ export class SearchResultsService {
   hasEarnings: boolean = false;
   hasResults: boolean = false;
   success: boolean = true;
+  isLoading: boolean = false;
 
   constructor(private api: ApiService) { }
 
   fetchResultsFor(ticker: string) {
+    this.isLoading = true;
     this.resetResults();
     this.fetchDescription(ticker);
   }
@@ -62,6 +64,7 @@ export class SearchResultsService {
           this.fetchRest(ticker);
         } else {
           this.success = false;
+          this.isLoading = false;
         }
       });
   }
@@ -237,5 +240,8 @@ export class SearchResultsService {
   private updateHasResults() {
     //this.hasResults = this.hasDescription;
     this.hasResults = this.hasDescription && this.hasQuote && this.hasPeers && this.hasHistoricalSummary && this.hasHistoricalChartsTab && this.hasSentiment && this.hasNews && this.hasEarnings;
+    if (this.hasResults) {
+      this.isLoading = false;
+    }
   }
 }
