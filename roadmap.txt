@@ -34,6 +34,16 @@ Roadmap:
         * https://peterdaugaardrasmussen.com/2021/03/14/angular-how-to-keep-state-when-navigating-between-routes/
         * https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
 
+[x] watchlist & portfolio operations from search page
+[x] watchlist & portfolio use local storage
+[x] loading on search
+[] fix routing logic & implement clickable watchlist & portfolio entries
+[] add footer
+[] auto update
+[] show results even if all APIs don't respond
+[] check how it looks in mobile
+[] add logic about if market is open or not
+
 Notes:
 * Use Bootstrap 4+
 * Use ng-bootstrap

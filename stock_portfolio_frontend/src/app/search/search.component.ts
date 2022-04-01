@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { SearchResultsService } from '../search-results.service';
 
@@ -10,10 +11,22 @@ import { SearchResultsService } from '../search-results.service';
 export class SearchComponent implements OnInit {
 
   constructor(
-    public rs: SearchResultsService
+    private route: ActivatedRoute,
+    public rs: SearchResultsService,
   ) {
   }
 
   ngOnInit(): void {
+    this.updateBasedOnRoute();
+  }
+
+  private updateBasedOnRoute(): void {
+    const ticker: string = this.route.snapshot.paramMap.get('ticker')?.toUpperCase() || '';
+
+    if (ticker === 'HOME' || ticker === '') {
+      return;
+    }
+
+    this.rs.fetchResultsFor(ticker);
   }
 }
