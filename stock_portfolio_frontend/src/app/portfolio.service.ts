@@ -49,10 +49,19 @@ export class PortfolioService {
     )
   }
 
-  buyShares(ticker: string, buyQuantity: number): boolean {
+  getOwnedQuantity(ticker: string): number {
+    let s = this.getShare(ticker);
+    return s ? s.quantity : 0;
+  }
+
+  buyShares(ticker: string, buyQuantity: number, name?: string, currentPrice?: number): boolean {
     let s: Share | undefined = this.getShare(ticker);
     if (!s) {
-      return false;
+      if (!name || !currentPrice) {
+        return false;
+      }
+      s = this.createShare(ticker, name, currentPrice);
+      this.portfolio.shares.push(s);
     }
 
     let buyCost = buyQuantity * s.currentPrice;
@@ -103,6 +112,19 @@ export class PortfolioService {
       }
     }
     return undefined;
+  }
+
+  private createShare(ticker: string, name: string, currentPrice: number): Share {
+    return {
+      ticker: ticker,
+      name: name,
+      quantity: 0,
+      avgCost: 0,
+      totalCost: 0,
+      change: currentPrice - 0,
+      currentPrice: currentPrice,
+      marketValue: 0
+    }
   }
 
   private getPortfolioFromLocalStorage(): Observable<Portfolio> {

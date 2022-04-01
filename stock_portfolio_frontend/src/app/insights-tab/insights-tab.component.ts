@@ -8,10 +8,14 @@ import { SearchResultsService } from '../search-results.service';
   styleUrls: ['./insights-tab.component.css']
 })
 export class InsightsTabComponent implements OnInit {
+  reddit: any;
+  twitter: any;
 
   constructor(public rs: SearchResultsService) { }
 
   ngOnInit(): void {
+    this.reddit = this.rs.sentiment.reddit ? this.rs.sentiment.reddit[0] : undefined;
+    this.twitter = this.rs.sentiment.twitter ? this.rs.sentiment.twitter[0] : undefined;
   }
 
 }

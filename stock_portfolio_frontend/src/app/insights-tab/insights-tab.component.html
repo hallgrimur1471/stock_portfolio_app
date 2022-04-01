@@ -11,18 +11,18 @@
                     </tr>
                     <tr>
                         <th class="text-muted text-center table-secondary">Total Mentions</th>
-                        <th class="text-center table-default i-table-value">{{rs.sentiment.reddit[0].mention}}</th>
-                        <th class="text-center i-table-value">{{rs.sentiment.twitter[0].mention | number}}</th>
+                        <th *ngIf="reddit" class="text-center table-default i-table-value">{{reddit.mention}}</th>
+                        <th *ngIf="twitter" class="text-center i-table-value">{{twitter.mention | number}}</th>
                     </tr>
                     <tr>
                         <th class="text-muted text-center table-secondary">Positive Mentions</th>
-                        <th class="text-center i-table-value">{{rs.sentiment.reddit[0].positiveMention | number}}</th>
-                        <th class="text-center i-table-value">{{rs.sentiment.twitter[0].positiveMention | number}}</th>
+                        <th *ngIf="reddit" class="text-center i-table-value">{{reddit.positiveMention | number}}</th>
+                        <th *ngIf="twitter" class="text-center i-table-value">{{twitter.positiveMention | number}}</th>
                     </tr>
                     <tr>
                         <th class="text-muted text-center table-secondary">Negative Mentions</th>
-                        <th class="text-center i-table-value">{{rs.sentiment.reddit[0].negativeMention | number}}</th>
-                        <th class="text-center i-table-value">{{rs.sentiment.twitter[0].negativeMention | number}}</th>
+                        <th *ngIf="reddit" class="text-center i-table-value">{{reddit.negativeMention | number}}</th>
+                        <th *ngIf="twitter" class="text-center i-table-value">{{twitter.negativeMention | number}}</th>
                     </tr>
                 </tbody>
             </table>

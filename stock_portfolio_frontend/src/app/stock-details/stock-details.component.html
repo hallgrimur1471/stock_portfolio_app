@@ -1,4 +1,10 @@
 <div class="container">
+    <ngb-alert #buyAlert *ngIf="buyAlertMessage" type="success" (closed)="buyAlertMessage = ''" class="mt-4">{{
+        buyAlertMessage }}
+    </ngb-alert>
+    <ngb-alert #sellAlert *ngIf="sellAlertMessage" type="danger" (closed)="sellAlertMessage = ''" class="mt-4">{{
+        sellAlertMessage }}
+    </ngb-alert>
     <div class="row">
         <div class="col">
             <div class="sd-ticker-line">
@@ -18,15 +24,11 @@
             </div>
             <div>
                 <button type="button sd-buy-button" class="btn btn-success" (click)="buyClicked()">Buy</button>
+                <span *ngIf="isOwned">
+                    <button type="button sd-sell-button" class="btn btn-danger ms-2"
+                        (click)="sellClicked()">Sell</button>
+                </span>
             </div>
-            <!-- <div class="card border-0">
-                <div class="card-body">
-                    TSLA
-                </div>
-                <div class="card-subtitle text-muted">
-                    Tesla Inc
-                </div>
-            </div> -->
         </div>
         <div class="col d-flex justify-content-center">
             <img class="sd-logo h-50" src={{rs.description.logo}}>

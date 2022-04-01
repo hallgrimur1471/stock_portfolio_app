@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+
+import { BuyModalComponent } from '../buy-modal/buy-modal.component'
 
 import { SearchResultsService } from '../search-results.service';
+import { PortfolioService } from '../portfolio.service';
 
 @Component({
   selector: 'app-stock-details',
@@ -8,21 +15,89 @@ import { SearchResultsService } from '../search-results.service';
   styleUrls: ['./stock-details.component.css']
 })
 export class StockDetailsComponent implements OnInit {
-  percentChange: number = 1.1234;
+  isOwned: boolean = false;
 
-  constructor(public rs: SearchResultsService) { }
+  buyAlertMessage: string = '';
+  sellAlertMessage: string = '';
+  private buyAlertSubject = new Subject<string>();
+  private sellAlertSubject = new Subject<string>();
+
+  @ViewChild('buyAlert', { static: false }) buyAlert!: NgbAlert;
+  @ViewChild('sellAlert', { static: false }) sellAlert!: NgbAlert;
+
+  constructor(
+    public rs: SearchResultsService,
+    private ps: PortfolioService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
-    //this.percentChange = this.round(this.rs.quote.dp, 3);
-    this.percentChange = this.rs.quote.dp.toFixed(2);
-    //this.percentChange = this.rs.quote.dp;
+    this.buyAlertSubject.subscribe(message => this.buyAlertMessage = message);
+    this.buyAlertSubject.pipe(debounceTime(5000)).subscribe(() => {
+      if (this.buyAlert) {
+        this.buyAlert.close();
+      }
+    });
+
+    this.sellAlertSubject.subscribe(message => this.sellAlertMessage = message);
+    this.sellAlertSubject.pipe(debounceTime(5000)).subscribe(() => {
+      if (this.sellAlert) {
+        this.sellAlert.close();
+      }
+    });
+
+    const ticker = this.rs.description.ticker;
+    this.isOwned = this.ps.getOwnedQuantity(ticker) > 0 ? true : false;
   }
 
   buyClicked(): void {
+    let ticker = this.rs.description.ticker;
+    let name = this.rs.description.name;
+    let currentPrice = this.rs.quote.c;
+    let ownedQuantity = this.ps.getOwnedQuantity(ticker);
+    let moneyInWallet = this.ps.portfolio.money;
 
+    const modal = this.modalService.open(BuyModalComponent);
+    modal.componentInstance.ticker = ticker;
+    modal.componentInstance.currentPrice = currentPrice;
+    modal.componentInstance.ownedQuantity = ownedQuantity;
+    modal.componentInstance.moneyInWallet = moneyInWallet;
+    modal.componentInstance.isBuy = true;
+    modal.result.then((result) => {
+      this.ps.buyShares(ticker, modal.componentInstance.quantity, name, currentPrice);
+      this.openBuyAlert(ticker);
+    }, (reason) => {
+      console.log("Modal closed");
+    });
   }
 
-  private round(n: number, places: number) {
-    return Math.round(n * (10 ** places) / (10 ** places));
+  sellClicked(): void {
+    let ticker = this.rs.description.ticker;
+    let currentPrice = this.rs.quote.c;
+    let ownedQuantity = this.ps.getOwnedQuantity(ticker);
+    let moneyInWallet = this.ps.portfolio.money;
+
+    const modal = this.modalService.open(BuyModalComponent);
+    modal.componentInstance.ticker = ticker;
+    modal.componentInstance.currentPrice = currentPrice;
+    modal.componentInstance.ownedQuantity = ownedQuantity;
+    modal.componentInstance.moneyInWallet = moneyInWallet;
+    modal.componentInstance.isBuy = false;
+    modal.result.then((result) => {
+      this.ps.sellShares(ticker, modal.componentInstance.quantity);
+      this.openSellAlert(ticker);
+    }, (reason) => {
+      console.log("Modal closed");
+    });
+  }
+
+  private openBuyAlert(ticker: string) {
+    const msg: string = `${ticker} bought successfully.`;
+    this.buyAlertSubject.next(msg);
+  }
+
+  private openSellAlert(ticker: string) {
+    const msg: string = `${ticker} sold successfully.`;
+    this.sellAlertSubject.next(msg);
   }
 }
