@@ -23,9 +23,9 @@
                     <mat-option disabled class="loading" *ngIf="loading">
                         <mat-spinner diameter="40"></mat-spinner>
                     </mat-option>
-                    <mat-option *ngFor="let option of autocompleteOptions$ | async" [value]="option"
-                        (click)="search(option)">
-                        {{option}}
+                    <mat-option *ngFor="let option of autocompleteOptions$ | async" [value]="option.symbol"
+                        (click)="search(option.symbol)">
+                        {{option.symbol}} | {{option.description}}
                     </mat-option>
                 </mat-autocomplete>
             </div>

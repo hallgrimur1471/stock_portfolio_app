@@ -93,7 +93,7 @@ export class SearchFormComponent implements OnInit {
             this.startsWithIgnoreCase(company.displaySymbol, val)
         })),
         tap(() => this.loading = false),
-        map(response => response.map(company => company.symbol)),
+        map(response => response.map(company => company)),
       )
   }
 
