@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Portfolio } from './portfolio';
+import { Share } from './share';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class PortfolioService {
 
   constructor() { }
 
-  public getPortfolio(): Observable<Portfolio> {
+  getPortfolio(): Observable<Portfolio> {
     return this.getPortfolioFromLocalStorage().pipe(
       map(
         p => this.updatePortfolio(p)
@@ -46,6 +47,62 @@ export class PortfolioService {
         p => this.portfolio = p
       )
     )
+  }
+
+  buyShares(ticker: string, buyQuantity: number): boolean {
+    let s: Share | undefined = this.getShare(ticker);
+    if (!s) {
+      return false;
+    }
+
+    let buyCost = buyQuantity * s.currentPrice;
+    if (this.portfolio.money < buyCost) {
+      return false;
+    }
+
+    this.portfolio.money -= buyCost;
+    s.quantity += buyQuantity;
+    s.totalCost += buyCost;
+    s.avgCost = s.totalCost / s.quantity;
+    s.change = s.currentPrice - s.avgCost;
+    s.marketValue = s.currentPrice * s.quantity;
+
+    return true;
+  }
+
+  sellShares(ticker: string, sellQuantity: number): boolean {
+    let s: Share | undefined = this.getShare(ticker);
+    if (!s) {
+      return false;
+    }
+
+    if (s.quantity < sellQuantity) {
+      return false;
+    }
+
+    let sellValue = sellQuantity * s.currentPrice;
+    this.portfolio.money += sellValue;
+    s.quantity -= sellQuantity;
+    s.totalCost = s.totalCost - (sellQuantity * s.avgCost);
+    s.avgCost = s.totalCost / s.quantity;
+    s.change = s.currentPrice - s.avgCost;
+    s.marketValue = s.currentPrice * s.quantity;
+
+    if (s.quantity === 0) {
+      this.portfolio.shares.splice(this.portfolio.shares.indexOf(s), 1);
+    }
+
+    return true;
+  }
+
+  private getShare(ticker: string): Share | undefined {
+    const shares = this.portfolio.shares;
+    for (let i = 0; i < shares.length; i++) {
+      if (ticker === shares[i].ticker) {
+        return shares[i];
+      }
+    }
+    return undefined;
   }
 
   private getPortfolioFromLocalStorage(): Observable<Portfolio> {
@@ -61,15 +118,5 @@ export class PortfolioService {
       }
     )
     return p;
-  }
-
-  public buyShares(ticker: string, name: string, quantity: number, currentPrice: number): boolean {
-    // let s = getShare(ticker);
-    // let buyCost = quantity * s.currentPrice;
-    // if (this.money >= buyCost) {
-    //
-    // }
-
-    return true;
   }
 }

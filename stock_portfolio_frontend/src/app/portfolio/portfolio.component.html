@@ -5,7 +5,7 @@
     buyAlertMessage }}
 </ngb-alert>
 <div class="h3 my-5">My Portfolio</div>
-<div class="h4">Money in Wallet: ${{portfolio.money}}</div>
+<div class="h4">Money in Wallet: ${{portfolio.money | number:'1.2-2'}}</div>
 <div *ngFor="let share of portfolio.shares; index as i">
     <div class="card my-3">
         <div class="card-header">

@@ -31,6 +31,5 @@ export class BuyModalComponent implements OnInit {
 
   sell(): void {
     console.log("Sell")
-
   }
 }

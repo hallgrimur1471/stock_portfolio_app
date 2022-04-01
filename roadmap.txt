@@ -27,6 +27,12 @@ Roadmap:
 [] Make sure stock prices are calculated using LIFO?: @458
 [] Use 60 seconds instead of 5 minutes to determine if market is open @466, we can use 5 min though @525
 [] For current time in stock details: Use LA time
+[] Make sure buy/sell logic has correct calculations https://piazza.com/class/kxindf11ki56s2?cid=597
+[] Search state
+    * behaviour subjects: https://piazza.com/class/kxindf11ki56s2?cid=597
+    * routeReuseStrategy:
+        * https://peterdaugaardrasmussen.com/2021/03/14/angular-how-to-keep-state-when-navigating-between-routes/
+        * https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
 
 Notes:
 * Use Bootstrap 4+

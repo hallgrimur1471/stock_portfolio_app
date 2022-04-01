@@ -17,13 +17,14 @@ import { PortfolioService } from '../portfolio.service';
 })
 export class PortfolioComponent implements OnInit {
   portfolio!: Portfolio;
-  sellAlertMessage: string = '';
-  buyAlertMessage: string = '';
-  private sellAlertSubject = new Subject<string>();
-  private buyAlertSubject = new Subject<string>();
 
-  @ViewChild('sellAlert', { static: false }) sellAlert!: NgbAlert;
+  buyAlertMessage: string = '';
+  sellAlertMessage: string = '';
+  private buyAlertSubject = new Subject<string>();
+  private sellAlertSubject = new Subject<string>();
+
   @ViewChild('buyAlert', { static: false }) buyAlert!: NgbAlert;
+  @ViewChild('sellAlert', { static: false }) sellAlert!: NgbAlert;
 
   constructor(private ps: PortfolioService, private modalService: NgbModal) { }
 
@@ -54,9 +55,10 @@ export class PortfolioComponent implements OnInit {
     modal.componentInstance.moneyInWallet = this.portfolio.money;
     modal.componentInstance.isBuy = true;
     modal.result.then((result) => {
+      this.ps.buyShares(share.ticker, modal.componentInstance.quantity);
       this.openBuyAlert(share.ticker);
     }, (reason) => {
-      console.log("Closed");
+      console.log("Modal closed");
     });
   }
 
@@ -69,9 +71,10 @@ export class PortfolioComponent implements OnInit {
     modal.componentInstance.moneyInWallet = this.portfolio.money;
     modal.componentInstance.isBuy = false;
     modal.result.then((result) => {
+      this.ps.sellShares(share.ticker, modal.componentInstance.quantity);
       this.openSellAlert(share.ticker);
     }, (reason) => {
-      console.log("Closed");
+      console.log("Modal closed");
     });
   }
 
