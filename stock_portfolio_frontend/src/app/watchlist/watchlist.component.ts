@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Watchlist } from '../watchlist';
+import { WatchlistEntry } from '../watchlist';
 import { WatchlistService } from '../watchlist.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { WatchlistService } from '../watchlist.service';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
-  watchlist: Watchlist[] = [];
+  watchlist: WatchlistEntry[] = [];
 
   constructor(private ws: WatchlistService) { }
 

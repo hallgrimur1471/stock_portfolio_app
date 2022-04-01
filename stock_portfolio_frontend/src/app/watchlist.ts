@@ -1,4 +1,4 @@
-export interface Watchlist {
+export interface WatchlistEntry {
     ticker: string,
     name: string,
     currentPrice: number,

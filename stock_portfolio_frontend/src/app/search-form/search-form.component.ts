@@ -22,20 +22,10 @@ export class SearchFormComponent implements OnInit {
   autocompleteOptions$!: Observable<any[]>;
   subscription$!: Observable<any[]>;
   loading = false;
-  // isDisplayError: boolean = false;
   error: Alert = {
     type: "danger",
     message: ""
   };
-
-  // closeError() {
-  //   this.isDisplayError = false;
-  // }
-
-  // private displayError(msg: string) {
-  //   this.error.message = msg;
-  //   // this.isDisplayError = true;
-  // }
 
   constructor(
     private apiService: ApiService,
@@ -60,7 +50,6 @@ export class SearchFormComponent implements OnInit {
   handleEnterKeypress(ticker: string): void {
     console.log("handling enter...")
     this.loading = false;
-    // this.autocompleteOptions$ = this.subscription$;
     this.search(ticker);
   }
 

@@ -30,6 +30,7 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPortfolio();
+    this.updatePortfolio();
 
     this.buyAlertSubject.subscribe(message => this.buyAlertMessage = message);
     this.buyAlertSubject.pipe(debounceTime(5000)).subscribe(() => {
@@ -91,5 +92,9 @@ export class PortfolioComponent implements OnInit {
   private getPortfolio(): void {
     this.ps.getPortfolio()
       .subscribe(portfolio => this.portfolio = portfolio);
+  }
+
+  private updatePortfolio(): void {
+    // TODO: implement
   }
 }
