@@ -41,12 +41,12 @@ Roadmap:
 [x] fix autocomplete options
 [x] fix alerts not working when buying/selling from search page
 [x] fix pressing clear doesn't clear search results
-[] add footer
+[x] add footer
+[] check how it looks in mobile
+[] read over specs and see if anything's missing
 [] auto update
 [] show results even if all APIs don't respond
-[] check how it looks in mobile
 [] add logic about if market is open or not
-[] read over specs and see if anything's missing
 
 Notes:
 * Use Bootstrap 4+
