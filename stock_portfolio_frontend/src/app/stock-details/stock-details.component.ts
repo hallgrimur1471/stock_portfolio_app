@@ -94,6 +94,7 @@ export class StockDetailsComponent implements OnInit {
     modal.result.then((result) => {
       this.ps.buyShares(ticker, modal.componentInstance.quantity, name, currentPrice);
       this.openBuyAlert(ticker);
+      this.updateIsOwned(ticker);
     }, (reason) => {
       console.log("Modal closed");
     });

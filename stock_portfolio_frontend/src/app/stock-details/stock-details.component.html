@@ -7,6 +7,12 @@
         class="mt-4">{{
         removeWatchAlertMessage }}
     </ngb-alert>
+    <ngb-alert #buyAlert *ngIf="buyAlertMessage" type="success" (closed)="buyAlertMessage = ''" class="mt-4">{{
+        buyAlertMessage }}
+    </ngb-alert>
+    <ngb-alert #sellAlert *ngIf="sellAlertMessage" type="danger" (closed)="sellAlertMessage = ''" class="mt-4">{{
+        sellAlertMessage }}
+    </ngb-alert>
     <div class="row">
         <div class="col">
             <div class="sd-ticker-line">

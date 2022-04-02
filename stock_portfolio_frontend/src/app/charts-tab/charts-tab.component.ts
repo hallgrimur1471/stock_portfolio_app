@@ -146,7 +146,6 @@ export class ChartsTabComponent implements OnInit {
   }
 
   private getOhlc(t: any, o: any, h: any, l: any, c: any) {
-    console.log(typeof t);
     return t.map((t: any, i: any) => {
       return [t * 1000, o[i], h[i], l[i], c[i]];
     });
