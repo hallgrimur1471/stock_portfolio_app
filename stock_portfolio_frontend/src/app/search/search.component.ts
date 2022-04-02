@@ -27,6 +27,10 @@ export class SearchComponent implements OnInit {
       return;
     }
 
+    if (this.rs.hasResults && this.rs.description.ticker === ticker) {
+      return;
+    }
+
     this.rs.fetchResultsFor(ticker);
   }
 }

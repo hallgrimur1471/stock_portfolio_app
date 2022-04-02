@@ -6,7 +6,7 @@
                 style="border-color: #2224ab !important">
                 <input class="form-control form-control-sm mx-2 my-1 sf-input" #searchBox type="text"
                     placeholder="Enter stock ticker symbol" [formControl]="control" [matAutocomplete]="auto"
-                    (keydown.enter)="handleEnterKeypress(searchBox.value)"
+                    (keydown.enter)="handleEnterKeypress(searchBox.value); searchBox.blur()"
                     oninput="this.value = this.value.toUpperCase()" />
                 <div class="input-group-append">
                     <button type="button" class="btn btn-sm" (click)="search(searchBox.value)">
