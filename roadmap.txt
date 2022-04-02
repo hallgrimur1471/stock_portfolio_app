@@ -39,8 +39,8 @@ Roadmap:
 [x] loading on search
 [x] fix routing logic & implement clickable watchlist & portfolio entries & company peers
 [x] fix autocomplete options
-[] fix alerts not working when buying/selling from search page
-[] fix pressing clear doesn't clear search results
+[x] fix alerts not working when buying/selling from search page
+[x] fix pressing clear doesn't clear search results
 [] add footer
 [] auto update
 [] show results even if all APIs don't respond

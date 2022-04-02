@@ -76,7 +76,7 @@ export class SearchFormComponent implements OnInit {
   }
 
   clearSearchResults(): void {
-    // TODO: implement
+    this.rs.clearResults();
   }
 
   private getOptions(val: string): Observable<any[]> {

@@ -7,38 +7,72 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class SearchResultsService {
-  description: any = Object();
-  description_str: string = '{"country":"US","currency":"USD","exchange":"NASDAQ NMS - GLOBAL MARKET","finnhubIndustry":"Automobiles","ipo":"2010-06-09","logo":"https://finnhub.io/api/logo?symbol=TSLA","marketCapitalization":935727.4,"name":"Tesla Inc","phone":"16506815000.0","shareOutstanding":1033.51,"ticker":"TSLA","weburl":"https://www.tesla.com/"}';
-  quote: any = Object();
-  quote_str: string = '{"c":935.74,"d":14.58,"dp":1.5828,"h":942.24,"l":921.75,"o":930,"pc":921.16,"t":1647961161}';
-  peers: any = Object();
-  historicalSummary: any = Object();
-  historical_str: string = '';
-  historicalChartsTab: any = Object();
-  sentiment: any = Object();
-  news: any = Object();
-  topNews: any = Object();
-  trends: any = Object();
-  earnings: any[] = [];
-  hasDescription: boolean = false;
-  hasQuote: boolean = false;
-  hasPeers: boolean = false;
-  hasHistoricalSummary: boolean = false;
-  hasHistoricalChartsTab: boolean = false;
-  hasSentiment: boolean = false;
-  hasNews: boolean = false;
-  hasTrends: boolean = false;
-  hasEarnings: boolean = false;
-  hasResults: boolean = false;
-  success: boolean = true;
-  isLoading: boolean = false;
+  description!: any;
+  description_str!: string;
+  quote!: any;
+  quote_str!: string;
+  peers!: any;
+  historicalSummary!: any;
+  historical_str!: string;
+  historicalChartsTab!: any;
+  sentiment!: any;
+  news!: any;
+  topNews!: any;
+  trends!: any;
+  earnings!: any[];
+  hasDescription!: boolean;
+  hasQuote!: boolean;
+  hasPeers!: boolean;
+  hasHistoricalSummary!: boolean;
+  hasHistoricalChartsTab!: boolean;
+  hasSentiment!: boolean;
+  hasNews!: boolean;
+  hasTrends!: boolean;
+  hasEarnings!: boolean;
+  hasResults!: boolean;
+  success!: boolean;
+  isLoading!: boolean;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {
+    this.initializeValues();
+  }
 
   fetchResultsFor(ticker: string) {
     this.isLoading = true;
     this.resetResults();
     this.fetchDescription(ticker);
+  }
+
+  clearResults(): void {
+    this.initializeValues();
+  }
+
+  private initializeValues(): void {
+    this.description = Object();
+    this.description_str = '{"country":"US","currency":"USD","exchange":"NASDAQ NMS - GLOBAL MARKET","finnhubIndustry":"Automobiles","ipo":"2010-06-09","logo":"https://finnhub.io/api/logo?symbol=TSLA","marketCapitalization":935727.4,"name":"Tesla Inc","phone":"16506815000.0","shareOutstanding":1033.51,"ticker":"TSLA","weburl":"https://www.tesla.com/"}';
+    this.quote = Object();
+    this.quote_str = '{"c":935.74,"d":14.58,"dp":1.5828,"h":942.24,"l":921.75,"o":930,"pc":921.16,"t":1647961161}';
+    this.peers = Object();
+    this.historicalSummary = Object();
+    this.historical_str = '';
+    this.historicalChartsTab = Object();
+    this.sentiment = Object();
+    this.news = Object();
+    this.topNews = Object();
+    this.trends = Object();
+    this.earnings = [];
+    this.hasDescription = false;
+    this.hasQuote = false;
+    this.hasPeers = false;
+    this.hasHistoricalSummary = false;
+    this.hasHistoricalChartsTab = false;
+    this.hasSentiment = false;
+    this.hasNews = false;
+    this.hasTrends = false;
+    this.hasEarnings = false;
+    this.hasResults = false;
+    this.success = true;
+    this.isLoading = false;
   }
 
   private fetchRest(ticker: string) {
