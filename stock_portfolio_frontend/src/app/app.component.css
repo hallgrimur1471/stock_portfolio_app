@@ -4,3 +4,20 @@
   background-attachment: fixed;
   min-height: 100%;
 }
+
+html, body {
+	min-height: 100%;
+}
+
+.s-not-footer {
+  min-height: calc(100vh - 3rem);
+}
+
+.s-footer {
+  height: 3rem;
+  background-color: #dddddd;
+}
+
+a {
+  text-decoration:none;
+}
