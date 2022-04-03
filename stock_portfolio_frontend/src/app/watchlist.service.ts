@@ -1,8 +1,8 @@
-import { Injectable, OnInit } from '@angular/core';
-
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 import { WatchlistEntry } from './watchlist';
+
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +10,29 @@ import { WatchlistEntry } from './watchlist';
 export class WatchlistService {
   watchlist!: WatchlistEntry[];
 
-  constructor() {
+  constructor(private api: ApiService) {
     this.initializeService();
   }
 
   initializeService(): void {
-    console.log("ws ngoninit...")
-    this.getWatchlist()
-      .subscribe(wl => this.watchlist = wl);
+    this.watchlist = this.getWatchlistFromLocalStorage();
   }
 
-  getWatchlist(): Observable<WatchlistEntry[]> {
-    const wl = this.watchlist || this.getWatchlistFromLocalStorage();
-    return of(wl);
+  updateWatchlist(): void {
+    for (let i = 0; i < this.watchlist.length; i++) {
+      const entry = this.watchlist[i];
+      this.api.getQuote(entry.ticker)
+        .subscribe(quote => {
+          const newEntry: WatchlistEntry = {
+            ticker: entry.ticker,
+            name: entry.name,
+            currentPrice: quote.c,
+            changeInPrice: quote.d,
+            changeInPricePercentage: quote.dp
+          }
+          this.watchlist[i] = newEntry;
+        });
+    }
   }
 
   getWatchlistEntry(ticker: string): WatchlistEntry | undefined {
@@ -39,6 +49,11 @@ export class WatchlistService {
     this.saveWatchlist();
   }
 
+  removeFromWatchlistByIndex(index: number) {
+    this.watchlist.splice(index, 1);
+    this.saveWatchlist();
+  }
+
   removeFromWatchlist(ticker: string) {
     let entryIndex: number | undefined;
     for (let i = 0; i < this.watchlist.length; i++) {
@@ -49,9 +64,7 @@ export class WatchlistService {
     if (entryIndex === undefined) {
       return;
     }
-
-    this.watchlist.splice(entryIndex, 1);
-    this.saveWatchlist();
+    this.removeFromWatchlistByIndex(entryIndex);
   }
 
   private getWatchlistFromLocalStorage(): WatchlistEntry[] {

@@ -1,6 +1,6 @@
 <div class="h3 my-5">My Watchlist</div>
-<div *ngFor="let w of watchlist; index as i">
-    <div class="card my-3" (click)="showResults(i)">
+<div *ngFor="let w of ws.watchlist; index as i">
+    <div class="card my-3">
         <div class="card-head text-end">
             <button type="button" class="btn-close btn btn-sm" aria-label="Close"
                 style="font-size: 0.5rem; padding-right: 8px" (click)="removeFromWatchlist(i)"></button>
@@ -34,7 +34,7 @@
         </a>
     </div>
 </div>
-<div *ngIf="watchlist.length === 0">
+<div *ngIf="ws.watchlist.length === 0">
     <ngb-alert class="text-center" [dismissible]="false">
         Currently you don't have any stock in your watchlist.
     </ngb-alert>

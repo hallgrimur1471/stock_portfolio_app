@@ -9,25 +9,15 @@ import { WatchlistService } from '../watchlist.service';
   styleUrls: ['./watchlist.component.css']
 })
 export class WatchlistComponent implements OnInit {
-  watchlist: WatchlistEntry[] = [];
 
-  constructor(private ws: WatchlistService) { }
+  constructor(public ws: WatchlistService) { }
 
   ngOnInit(): void {
-    this.getWatchlist();
+    this.ws.updateWatchlist();
   }
 
   removeFromWatchlist(index: number) {
-    this.watchlist.splice(index, 1);
-  }
-
-  showResults(index: number) {
-    console.log(`Showing search results for ${index}...`);
-    // TODO: implement
-  }
-
-  private getWatchlist(): void {
-    this.ws.getWatchlist().
-      subscribe(watchlist => this.watchlist = watchlist);
+    this.ws.removeFromWatchlistByIndex(index);
+    this.ws.updateWatchlist();
   }
 }
