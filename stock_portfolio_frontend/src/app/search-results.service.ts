@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ApiService } from './api.service';
 
@@ -35,6 +36,7 @@ export class SearchResultsService {
   isMarketOpen!: boolean;
   marketCloseDate!: string;
   marketCloseDateEpoch!: number;
+  timerSubscription!: Subscription;
 
   constructor(private api: ApiService) {
     this.initializeValues();
@@ -109,19 +111,27 @@ export class SearchResultsService {
   }
 
   private fetchQuoteAndHistoricalSummary(ticker: string) {
-    this.api.getQuote(ticker)
-      .subscribe(quote => {
-        this.quote = quote;
-        this.quote.th = this.epoch2date(this.quote.t);
-        this.quote_str = JSON.stringify(quote);
-        this.quote.currentTime = this.getCurrentTimeHumanReadable();
-        this.updateIsMarketOpen();
-        this.hasQuote = true;
-        this.updateHasResults();
+    this.timerSubscription = timer(0, 15000).pipe(
+      map(() => {
+        this.api.getQuote(ticker)
+          .subscribe(quote => {
+            this.quote = quote;
+            this.quote.th = this.epoch2date(this.quote.t);
+            this.quote_str = JSON.stringify(quote);
+            this.quote.currentTime = this.getCurrentTimeHumanReadable();
+            this.updateIsMarketOpen();
+            this.hasQuote = true;
+            this.updateHasResults();
 
-        // Fetching Historical summary depends on isMarketOpen and marketCloseDate
-        this.fetchHistoricalSummary(ticker);
-      });
+            // Fetching Historical summary depends on isMarketOpen and marketCloseDate
+            this.fetchHistoricalSummary(ticker);
+
+            if (!this.isMarketOpen) {
+              this.timerSubscription.unsubscribe();
+            }
+          });
+      })
+    ).subscribe();
   }
 
   private fetchPeers(ticker: string) {
@@ -144,6 +154,8 @@ export class SearchResultsService {
       to = Math.floor(this.marketCloseDateEpoch);
       from = new Date(to * 1000);
     }
+    // to = Math.floor(to - (60 * 60 * 24 * Math.floor(Math.random() * 7))); // TODO: remove
+    // from = new Date(to * 1000); // TODO: remove
     let hoursWindow = 6;
     from.setHours(from.getHours() - hoursWindow);
     from = Math.floor(from.getTime() / 1000);

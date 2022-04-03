@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription, timer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { SearchResultsService } from '../search-results.service';
 
@@ -18,10 +20,12 @@ export class SummaryChartComponent implements OnInit {
   oneToOneFlag: boolean = true; // optional boolean, defaults to false
   runOutsideAngular: boolean = false; // optional boolean, defaults to false
 
+  timerSubscription!: Subscription;
+
   constructor(public rs: SearchResultsService) { }
 
   ngOnInit(): void {
-    const chartColor = this.rs.quote.dp > 0 ? '#198754' : '#dc3545'
+    let chartColor = this.rs.quote.dp > 0 ? '#198754' : '#dc3545'
     this.chartOptions = {
       chart: {
         type: 'line',
@@ -59,5 +63,19 @@ export class SummaryChartComponent implements OnInit {
         enabled: false
       }
     }; // required
+    this.timerSubscription = timer(0, 500).pipe(
+      map(() => {
+        chartColor = this.rs.quote.dp > 0 ? '#198754' : '#dc3545'
+        this.chartOptions.plotOptions!.series!.color = chartColor;
+        this.chartOptions.series![0] =
+        {
+          name: this.rs.description.ticker,
+          data: this.rs.historicalSummary.tc,
+          type: 'line',
+          showInLegend: false,
+        }
+        this.updateFlag = true;
+      })
+    ).subscribe();
   }
 }

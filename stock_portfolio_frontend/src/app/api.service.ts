@@ -37,9 +37,13 @@ export class ApiService {
         );
     }
 
-    getQuote(ticker: string): Observable<object> {
+    getQuote(ticker: string): Observable<any> {
         const url = `${this.apiUrl}/quote?symbol=${ticker}`;
-        return this.http.get<object>(url).pipe(
+        return this.http.get<any>(url).pipe(
+            // map(quote => {
+            //     quote.dp += Math.random() * 0.5; // TODO: remove
+            //     return quote;
+            // }),
             tap(_ => console.log(`fetched quote for ticker=${ticker}`)),
             catchError(this.handleError<object>(`getQuote ticker=${ticker}`))
         );
