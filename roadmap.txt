@@ -49,10 +49,10 @@ Roadmap:
 [] read over specs and see if anything's missing
 [] fix on deployed version 'Cannot GET /search/home' ?
 
-[] 0.15 points: Color of the chart based on change value
+[x] 0.15 points: Color of the chart based on change value
 [] 0.25 points: Live changes in My Watchlist after removing stock from watchlist by clicking remove button
 [x] 1 points: fix mobile looks
-[] 0.3 points: Chart must be of the last working day with correct properties
+[x] 0.3 points: Chart must be of the last working day with correct properties
 [] 0.4 points: Live changes in My Portfolio list after performing Trading functions
 
 Notes:

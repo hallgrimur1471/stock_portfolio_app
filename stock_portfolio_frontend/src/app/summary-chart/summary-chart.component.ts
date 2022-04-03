@@ -21,6 +21,7 @@ export class SummaryChartComponent implements OnInit {
   constructor(public rs: SearchResultsService) { }
 
   ngOnInit(): void {
+    const chartColor = this.rs.quote.dp > 0 ? '#198754' : '#dc3545'
     this.chartOptions = {
       chart: {
         type: 'line',
@@ -37,7 +38,7 @@ export class SummaryChartComponent implements OnInit {
       }],
       plotOptions: {
         series: {
-          color: '#198754'
+          color: chartColor
         }
       },
       yAxis: {
