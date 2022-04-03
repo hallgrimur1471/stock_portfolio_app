@@ -14,7 +14,7 @@
         sellAlertMessage }}
     </ngb-alert>
     <div class="row">
-        <div class="col">
+        <div class="col-4">
             <div class="sd-ticker-line">
                 <span class="sd-ticker h2 align-top">{{rs.description.ticker}}</span>
                 <!--https://icons.getbootstrap.com/icons/star/-->
@@ -36,17 +36,17 @@
                 {{rs.description.exchange}}
             </div>
             <div>
-                <button type="button sd-buy-button" class="btn btn-success" (click)="buyClicked()">Buy</button>
+                <button type="button sd-buy-button" class="btn btn-success me-2 my-2"
+                    (click)="buyClicked()">Buy</button>
                 <span *ngIf="isOwned">
-                    <button type="button sd-sell-button" class="btn btn-danger ms-2"
-                        (click)="sellClicked()">Sell</button>
+                    <button type="button sd-sell-button" class="btn btn-danger" (click)="sellClicked()">Sell</button>
                 </span>
             </div>
         </div>
-        <div class="col d-flex justify-content-center">
-            <img class="sd-logo h-50" src={{rs.description.logo}} style="max-height:200px">
+        <div class="col-4 d-flex justify-content-center">
+            <img class="sd-logo h-50" src={{rs.description.logo}} style="max-width:100%; max-height: 100%">
         </div>
-        <div class="col" [ngClass]="{'text-success': rs.quote.dp > 0, 'text-danger': rs.quote.dp < 0}">
+        <div class="col-4" [ngClass]="{'text-success': rs.quote.dp > 0, 'text-danger': rs.quote.dp < 0}">
             <div class="sd-last-price h2 text-end">{{rs.quote.c}}</div>
             <div class="sd-change-line h4 text-end">
                 <i class="bi bi-caret-up-fill"></i>

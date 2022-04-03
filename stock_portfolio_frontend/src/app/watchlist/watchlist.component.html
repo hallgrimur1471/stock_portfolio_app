@@ -8,11 +8,11 @@
         <a class="" routerLink="/search/{{w.ticker}}">
             <div class="card-body pt-0">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <p class="h4">{{w.ticker}}</p>
                         <p class="h6">{{w.name}}</p>
                     </div>
-                    <div class="col-md-6 text-end"
+                    <div class="col-6 text-end"
                         [ngClass]="{'text-success': w.changeInPricePercentage > 0, 'text-danger': w.changeInPricePercentage < 0}">
                         <div class="h4 text-end">
                             {{w.currentPrice | number}}
