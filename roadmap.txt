@@ -42,11 +42,12 @@ Roadmap:
 [x] fix alerts not working when buying/selling from search page
 [x] fix pressing clear doesn't clear search results
 [x] add footer
-[] check how it looks in mobile
-[] read over specs and see if anything's missing
+[x] check how it looks in mobile
 [] auto update
 [] show results even if all APIs don't respond
-[] add logic about if market is open or not
+[x] add logic about if market is open or not
+[] read over specs and see if anything's missing
+[] fix on deployed version 'Cannot GET /search/home' ?
 
 [] 0.15 points: Color of the chart based on change value
 [] 0.25 points: Live changes in My Watchlist after removing stock from watchlist by clicking remove button

@@ -32,6 +32,8 @@ export class SearchResultsService {
   hasResults!: boolean;
   success!: boolean;
   isLoading!: boolean;
+  isMarketOpen!: boolean;
+  marketCloseDate!: string;
 
   constructor(private api: ApiService) {
     this.initializeValues();
@@ -73,6 +75,8 @@ export class SearchResultsService {
     this.hasResults = false;
     this.success = true;
     this.isLoading = false;
+    this.isMarketOpen = true;
+    this.marketCloseDate = "";
   }
 
   private fetchRest(ticker: string) {
@@ -109,6 +113,8 @@ export class SearchResultsService {
         this.quote = quote;
         this.quote.th = this.epoch2date(this.quote.t);
         this.quote_str = JSON.stringify(quote);
+        this.quote.currentTime = this.getCurrentTimeHumanReadable();
+        this.updateIsMarketOpen();
         this.hasQuote = true;
         this.updateHasResults();
       });
@@ -245,6 +251,18 @@ export class SearchResultsService {
     return t.map((t: any, i: any) => { return [t * 1000, c[i]] });
   }
 
+  private updateIsMarketOpen(): void {
+    const currentTime = Date.now() / 1000; // seconds
+    const lastMarketChange = this.quote.t; // seconds
+    const secondsDiff = currentTime - lastMarketChange;
+    if (secondsDiff > 5 * 60) {
+      this.isMarketOpen = false;
+      this.marketCloseDate = this.epoch2date(lastMarketChange);
+    } else {
+      this.isMarketOpen = true;
+    }
+  }
+
   private epoch2date(unix_epoch: number) {
     let date = new Date(unix_epoch * 1000);
 
@@ -252,11 +270,15 @@ export class SearchResultsService {
     let month = ('00' + date.getMonth()).slice(-2);
     let day = ('00' + date.getDate()).slice(-2);
 
-    let hour = ('00' + date.getHours()).slice(-2);
+    let hour = ('00' + (date.getHours() + 1)).slice(-2);
     let minute = ('00' + date.getMinutes()).slice(-2);
     let second = ('00' + date.getSeconds()).slice(-2);
 
     return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+  }
+
+  private getCurrentTimeHumanReadable(): string {
+    return this.epoch2date(Date.now() / 1000);
   }
 
   private resetResults() {

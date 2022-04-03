@@ -54,16 +54,18 @@
             </div>
             <div class="sd-timestamp text-end text-muted">
                 <!-- TODO: this should be current local time (LA)-->
-                {{rs.quote.th}}
+                <!-- {{rs.quote.th}} -->
+                {{rs.quote.currentTime}}
                 <!-- 2022-02-24 12:16:35 -->
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col"></div>
-        <div class="col d-flex justify-content-center">
+    <div class="d-flex justify-content-center my-3">
+        <div *ngIf="rs.isMarketOpen">
             <p class="fw-bold text-success">Market is Open</p>
         </div>
-        <div class="col"></div>
+        <div *ngIf="!rs.isMarketOpen">
+            <p class="fw-bold text-danger">Market Closed on {{rs.marketCloseDate}}</p>
+        </div>
     </div>
 </div>
