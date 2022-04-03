@@ -34,6 +34,7 @@ export class SearchResultsService {
   isLoading!: boolean;
   isMarketOpen!: boolean;
   marketCloseDate!: string;
+  marketCloseDateEpoch!: number;
 
   constructor(private api: ApiService) {
     this.initializeValues();
@@ -77,12 +78,12 @@ export class SearchResultsService {
     this.isLoading = false;
     this.isMarketOpen = true;
     this.marketCloseDate = "";
+    this.marketCloseDateEpoch = 0;
   }
 
   private fetchRest(ticker: string) {
-    this.fetchQuote(ticker);
+    this.fetchQuoteAndHistoricalSummary(ticker);
     this.fetchPeers(ticker);
-    this.fetchHistoricalSummary(ticker);
     this.fetchHistoricalChartsTab(ticker);
     this.fetchSocialSentiment(ticker);
     this.fetchNews(ticker);
@@ -107,7 +108,7 @@ export class SearchResultsService {
       });
   }
 
-  private fetchQuote(ticker: string) {
+  private fetchQuoteAndHistoricalSummary(ticker: string) {
     this.api.getQuote(ticker)
       .subscribe(quote => {
         this.quote = quote;
@@ -117,6 +118,9 @@ export class SearchResultsService {
         this.updateIsMarketOpen();
         this.hasQuote = true;
         this.updateHasResults();
+
+        // Fetching Historical summary depends on isMarketOpen and marketCloseDate
+        this.fetchHistoricalSummary(ticker);
       });
   }
 
@@ -131,8 +135,15 @@ export class SearchResultsService {
 
   private fetchHistoricalSummary(ticker: string) {
     let resolution: string = '5';
-    let to: any = Math.floor(Date.now() / 1000);
-    let from: any = new Date();
+    let from: any;
+    let to: any;
+    if (this.isMarketOpen) {
+      to = Math.floor(Date.now() / 1000);
+      from = new Date();
+    } else {
+      to = Math.floor(this.marketCloseDateEpoch);
+      from = new Date(to * 1000);
+    }
     let hoursWindow = 6;
     from.setHours(from.getHours() - hoursWindow);
     from = Math.floor(from.getTime() / 1000);
@@ -252,12 +263,13 @@ export class SearchResultsService {
   }
 
   private updateIsMarketOpen(): void {
-    const currentTime = Date.now() / 1000; // seconds
+    const currentTime = Math.floor(Date.now() / 1000); // seconds
     const lastMarketChange = this.quote.t; // seconds
     const secondsDiff = currentTime - lastMarketChange;
     if (secondsDiff > 5 * 60) {
       this.isMarketOpen = false;
       this.marketCloseDate = this.epoch2date(lastMarketChange);
+      this.marketCloseDateEpoch = lastMarketChange;
     } else {
       this.isMarketOpen = true;
     }
@@ -267,10 +279,10 @@ export class SearchResultsService {
     let date = new Date(unix_epoch * 1000);
 
     let year = date.getFullYear();
-    let month = ('00' + date.getMonth()).slice(-2);
+    let month = ('00' + (date.getMonth() + 1)).slice(-2);
     let day = ('00' + date.getDate()).slice(-2);
 
-    let hour = ('00' + (date.getHours() + 1)).slice(-2);
+    let hour = ('00' + date.getHours()).slice(-2);
     let minute = ('00' + date.getMinutes()).slice(-2);
     let second = ('00' + date.getSeconds()).slice(-2);
 
