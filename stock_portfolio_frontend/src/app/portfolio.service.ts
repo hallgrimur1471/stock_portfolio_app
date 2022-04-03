@@ -6,30 +6,42 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Portfolio } from './portfolio';
 import { Share } from './share';
 
+import { ApiService } from './api.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
   portfolio!: Portfolio;
 
-  constructor() {
+  constructor(private api: ApiService) {
     this.initializeService();
+    this.updatePortfolio();
   }
 
   initializeService(): void {
-    this.getPortfolio()
-      .subscribe(p => this.portfolio = p);
+    this.portfolio = this.getPortfolioFromLocalStorage();
   }
 
-  getPortfolio(): Observable<Portfolio> {
-    return this.getPortfolioFromLocalStorage().pipe(
-      map(
-        p => this.updatePortfolio(p)
-      ),
-      tap(
-        p => this.portfolio = p
-      )
-    )
+  updatePortfolio(): void {
+    for (let i = 0; i < this.portfolio.shares.length; i++) {
+      const share: Share = this.portfolio.shares[i];
+      this.api.getQuote(share.ticker)
+        .subscribe(quote => {
+          const updatedShare: Share = {
+            ticker: share.ticker,
+            name: share.name,
+            quantity: share.quantity,
+            currentPrice: quote.c,
+            avgCost: share.avgCost,
+            totalCost: share.totalCost,
+            change: quote.c - share.avgCost,
+            marketValue: quote.c * share.quantity
+          }
+          this.portfolio.shares[i] = updatedShare;
+          this.savePortfolio();
+        })
+    }
   }
 
   getOwnedQuantity(ticker: string): number {
@@ -114,62 +126,21 @@ export class PortfolioService {
     }
   }
 
-  private getPortfolioFromLocalStorage(): Observable<Portfolio> {
+  private getPortfolioFromLocalStorage(): Portfolio {
     let portfolio_str: string | null = localStorage.getItem("portfolio")
     let portfolio: Portfolio = portfolio_str ? JSON.parse(portfolio_str) : this.getInitialPortfolio();
 
-    this.portfolio = portfolio;
-    return of(this.portfolio);
+    return portfolio;
   }
 
   private savePortfolio(): void {
-    console.log("Saving portfolio..")
     localStorage.setItem("portfolio", JSON.stringify(this.portfolio));
   }
 
   private getInitialPortfolio(): Portfolio {
-    // return {
-    //   money: 25000,
-    //   shares: this.getMockShares()
-    // }
     return {
       money: 25000,
       shares: []
     }
-  }
-
-  private getMockShares(): Share[] {
-    return [
-      {
-        ticker: 'VMW',
-        name: 'VMware Inc',
-        quantity: 70.00,
-        avgCost: 117.49,
-        totalCost: 8224.30,
-        change: 0.23,
-        currentPrice: 117.72,
-        marketValue: 8240.40
-      },
-      {
-        ticker: 'GOOGL',
-        name: 'Alphabet Inc',
-        quantity: 3,
-        avgCost: 2626.33,
-        totalCost: 7878.99,
-        change: -2.64,
-        currentPrice: 2628.97,
-        marketValue: 7886.91,
-      }
-    ]
-  }
-
-  private updatePortfolio(p: Portfolio): Portfolio {
-    p.shares.map(
-      (s) => {
-        //s.currentPrice = 100000;
-        s;
-      }
-    )
-    return p;
   }
 }

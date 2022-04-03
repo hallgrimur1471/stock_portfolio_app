@@ -5,8 +5,8 @@
     buyAlertMessage }}
 </ngb-alert>
 <div class="h3 my-5">My Portfolio</div>
-<div class="h4">Money in Wallet: ${{portfolio.money | number:'1.2-2'}}</div>
-<div *ngFor="let share of portfolio.shares; index as i">
+<div class="h4">Money in Wallet: ${{ps.portfolio.money | number:'1.2-2'}}</div>
+<div *ngFor="let share of ps.portfolio.shares; index as i">
     <div class="card my-3">
         <a class="" routerLink="/search/{{share.ticker}}" style="text-decoration:none">
             <div class="card-header">
@@ -71,7 +71,7 @@
         </div>
     </div>
 </div>
-<div *ngIf="portfolio.shares.length === 0">
+<div *ngIf="ps.portfolio.shares.length === 0">
     <ngb-alert class="text-center" [dismissible]="false">
         Currently you don't have any stock.
     </ngb-alert>

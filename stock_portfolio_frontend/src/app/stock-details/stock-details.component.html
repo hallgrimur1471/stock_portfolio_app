@@ -47,10 +47,10 @@
             <img class="sd-logo h-50" src={{rs.description.logo}} style="max-width:100%; max-height: 100%">
         </div>
         <div class="col-4" [ngClass]="{'text-success': rs.quote.dp > 0, 'text-danger': rs.quote.dp < 0}">
-            <div class="sd-last-price h2 text-end">{{rs.quote.c}}</div>
+            <div class="sd-last-price h2 text-end">{{rs.quote.c | number:'1.2-2'}}</div>
             <div class="sd-change-line h4 text-end">
                 <i class="bi bi-caret-up-fill"></i>
-                <span class="sd-change">{{rs.quote.d.toFixed(2)}} ({{rs.quote.dp.toFixed(2)}}%)</span>
+                <span class="sd-change">{{rs.quote.d | number:'1.2-2'}} ({{rs.quote.dp | number:'1.2-2'}}%)</span>
             </div>
             <div class="sd-timestamp text-end text-muted">
                 <!-- TODO: this should be current local time (LA)-->

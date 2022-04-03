@@ -41,7 +41,7 @@ export class ApiService {
         const url = `${this.apiUrl}/quote?symbol=${ticker}`;
         return this.http.get<any>(url).pipe(
             // map(quote => {
-            //     quote.dp += Math.random() * 0.5; // TODO: remove
+            //     quote.c += (Math.random() * 1000) - 500; // TODO: remove
             //     return quote;
             // }),
             tap(_ => console.log(`fetched quote for ticker=${ticker}`)),

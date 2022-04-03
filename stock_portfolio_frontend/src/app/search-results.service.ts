@@ -197,8 +197,6 @@ export class SearchResultsService {
 
   private fetchNews(ticker: string) {
     let date: any = new Date(Date.now());
-    console.log(date);
-    console.log(typeof date.getMonth());
 
     let to_day: string = ('00' + date.getDate()).slice(-2);
     let to_month: string = ('00' + (date.getMonth() + 1)).slice(-2);

@@ -16,7 +16,7 @@ import { PortfolioService } from '../portfolio.service';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit {
-  portfolio!: Portfolio;
+  // portfolio!: Portfolio;
 
   buyAlertMessage: string = '';
   sellAlertMessage: string = '';
@@ -26,11 +26,10 @@ export class PortfolioComponent implements OnInit {
   @ViewChild('buyAlert', { static: false }) buyAlert!: NgbAlert;
   @ViewChild('sellAlert', { static: false }) sellAlert!: NgbAlert;
 
-  constructor(private ps: PortfolioService, private modalService: NgbModal) { }
+  constructor(public ps: PortfolioService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.getPortfolio();
-    this.updatePortfolio();
+    this.ps.updatePortfolio();
 
     this.buyAlertSubject.subscribe(message => this.buyAlertMessage = message);
     this.buyAlertSubject.pipe(debounceTime(5000)).subscribe(() => {
@@ -49,33 +48,35 @@ export class PortfolioComponent implements OnInit {
 
   openBuyModal(index: number): void {
     const modal = this.modalService.open(BuyModalComponent);
-    const share = this.portfolio.shares[index];
+    const share = this.ps.portfolio.shares[index];
     modal.componentInstance.ticker = share.ticker;
     modal.componentInstance.currentPrice = share.currentPrice;
     modal.componentInstance.ownedQuantity = share.quantity;
-    modal.componentInstance.moneyInWallet = this.portfolio.money;
+    modal.componentInstance.moneyInWallet = this.ps.portfolio.money;
     modal.componentInstance.isBuy = true;
     modal.result.then((result) => {
       this.ps.buyShares(share.ticker, modal.componentInstance.quantity);
       this.openBuyAlert(share.ticker);
+      this.ps.updatePortfolio();
     }, (reason) => {
-      console.log("Modal closed");
+      this.ps.updatePortfolio();
     });
   }
 
   openSellModal(index: number): void {
     const modal = this.modalService.open(BuyModalComponent);
-    const share = this.portfolio.shares[index];
+    const share = this.ps.portfolio.shares[index];
     modal.componentInstance.ticker = share.ticker;
     modal.componentInstance.currentPrice = share.currentPrice;
     modal.componentInstance.ownedQuantity = share.quantity;
-    modal.componentInstance.moneyInWallet = this.portfolio.money;
+    modal.componentInstance.moneyInWallet = this.ps.portfolio.money;
     modal.componentInstance.isBuy = false;
     modal.result.then((result) => {
       this.ps.sellShares(share.ticker, modal.componentInstance.quantity);
       this.openSellAlert(share.ticker);
+      this.ps.updatePortfolio();
     }, (reason) => {
-      console.log("Modal closed");
+      this.ps.updatePortfolio();
     });
   }
 
@@ -87,14 +88,5 @@ export class PortfolioComponent implements OnInit {
   openBuyAlert(ticker: string) {
     const msg: string = `${ticker} bought successfully.`;
     this.buyAlertSubject.next(msg);
-  }
-
-  private getPortfolio(): void {
-    this.ps.getPortfolio()
-      .subscribe(portfolio => this.portfolio = portfolio);
-  }
-
-  private updatePortfolio(): void {
-    // TODO: implement
   }
 }
