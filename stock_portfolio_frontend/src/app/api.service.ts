@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -8,6 +12,11 @@ import { catchError, map, tap } from 'rxjs/operators';
     providedIn: 'root'
 })
 export class ApiService {
+    APIErrorAlertMessage: string = '';
+    APIErrorAlertSubject = new Subject<string>();
+
+    @ViewChild('APIErrorAlert', { static: false }) APIErrorAlert!: NgbAlert;
+
     private apiUrl = 'api';
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +24,14 @@ export class ApiService {
 
     constructor(
         private http: HttpClient,
-    ) { }
+    ) {
+        this.APIErrorAlertSubject.subscribe(message => this.APIErrorAlertMessage = message);
+        this.APIErrorAlertSubject.pipe(debounceTime(20000)).subscribe(() => {
+            if (this.APIErrorAlert) {
+                this.APIErrorAlert.close();
+            }
+        });
+    }
 
     getCompanies(search: string): Observable<any[]> {
         const url = `${this.apiUrl}/autocomplete?symbol=${search}`;
@@ -99,11 +115,10 @@ export class ApiService {
 
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {
-            // TODO: send the error to remote logging infrastructure
-            console.error(error); // log to console instead
+            console.error(error);
 
-            // TODO: better job of transforming error for user consumption
-            //this.log(`${operation} failed: ${error.message}`)
+            const error_msg: string = error.error.error;
+            this.APIErrorAlertSubject.next(error_msg);
 
             // Let the app keep running by returning an empty result.
             return of(result as T);

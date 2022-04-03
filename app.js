@@ -69,7 +69,18 @@ app.get("/api/news", (req, res, next) => {
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=${from}&to=${to}&token=${key}`;
 
+  // if (req.query.symbol === 'TSLA') {
+  //   new Promise(async (resolve, reject) => {
+  //     await new Promise(r => setTimeout(r, 3000));
+  //     res.status(523);
+  //     res.json({
+  //       error: `API call to Finnhub failed with status code ${523}`
+  //     });
+  //     return;
+  //   })
+  // } else {
   getFinnhub(url, res);
+  // }
 });
 
 // Company's Recommendation Trends

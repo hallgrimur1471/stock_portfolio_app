@@ -40,6 +40,11 @@ export class SearchResultsService {
 
   constructor(private api: ApiService) {
     this.initializeValues();
+
+    // Stop load bar when there is an API error.
+    this.api.APIErrorAlertSubject.subscribe(message => {
+      this.isLoading = false;
+    });
   }
 
   fetchResultsFor(ticker: string) {

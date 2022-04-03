@@ -4,31 +4,31 @@ Roadmap:
 [x] Setup express
 [x] Implement back-end
 [x] Setup Angular material
-[] Implement search bar
-    [] Add autocomplete
-    [] Add HTTP calls on keypress which update the autocomplete list
-    [] Add loading animation
+[x] Implement search bar
+    [x] Add autocomplete
+    [x] Add HTTP calls on keypress which update the autocomplete list
+    [x] Add loading animation
 [x] Setup Angular Routing
 [x] Setup ng-bootstrap
     * https://www.c-sharpcorner.com/article/getting-started-with-ng-bootstrap-in-angular-5-app/
 [x] Add ng-bootstrap Modal: https://ng-bootstrap.github.io/#/components/modal/examples
 [x] Add ng-bootstrap Alert: https://ng-bootstrap.github.io/#/components/alert/examples
-[] Try Bootstrap UI Components using the Bootstrap Grid System
-[] Set up Boostrap Navbar for the page?
-[] Implement Navbar
+[x] Try Bootstrap UI Components using the Bootstrap Grid System
+[x] Set up Boostrap Navbar for the page?
+[x] Implement Navbar
     * navbar documentation: https://getbootstrap.com/docs/4.0/components/navbar/
     * navbar tutorial, including in collapse: https://www.youtube.com/watch?v=akXfF066MY0
     * controlling navbar styles: https://stackoverflow.com/questions/41743102/changing-the-color-of-active-nav-item
-    [] First draft with functionality
-    [] Improved version with correct look
-[] Implement persistent search component state: "Usage of router doesn't refresh the page but it would reinitialize the component as you mentioned if navigated back. There are different strategies to save the component state globally using a service, which is part of the research to implement this." @452
+    [x] First draft with functionality
+    [x] Improved version with correct look
+[x] Implement persistent search component state: "Usage of router doesn't refresh the page but it would reinitialize the component as you mentioned if navigated back. There are different strategies to save the component state globally using a service, which is part of the research to implement this." @452
     * https://peterdaugaardrasmussen.com/2021/03/14/angular-how-to-keep-state-when-navigating-between-routes/
     * https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
-[] Make sure stock prices are calculated using LIFO?: @458
+[x] Make sure stock prices are calculated using LIFO?: @458
 [] Use 60 seconds instead of 5 minutes to determine if market is open @466, we can use 5 min though @525
-[] For current time in stock details: Use LA time
-[] Make sure buy/sell logic has correct calculations https://piazza.com/class/kxindf11ki56s2?cid=597
-[] Search state
+[x] For current time in stock details: Use LA time
+[x] Make sure buy/sell logic has correct calculations https://piazza.com/class/kxindf11ki56s2?cid=597
+[x] Search state
     * behaviour subjects: https://piazza.com/class/kxindf11ki56s2?cid=597
     * routeReuseStrategy:
         * https://peterdaugaardrasmussen.com/2021/03/14/angular-how-to-keep-state-when-navigating-between-routes/
@@ -43,17 +43,17 @@ Roadmap:
 [x] fix pressing clear doesn't clear search results
 [x] add footer
 [x] check how it looks in mobile
-[] auto update
-[] show results even if all APIs don't respond
+[x] auto update
+[x] show error if all APIs don't respond
 [x] add logic about if market is open or not
 [] read over specs and see if anything's missing
 [] fix on deployed version 'Cannot GET /search/home' ?
 
 [x] 0.15 points: Color of the chart based on change value
-[] 0.25 points: Live changes in My Watchlist after removing stock from watchlist by clicking remove button
+[x] 0.25 points: Live changes in My Watchlist after removing stock from watchlist by clicking remove button
 [x] 1 points: fix mobile looks
 [x] 0.3 points: Chart must be of the last working day with correct properties
-[] 0.4 points: Live changes in My Portfolio list after performing Trading functions
+[x] 0.4 points: Live changes in My Portfolio list after performing Trading functions
 
 Notes:
 * Use Bootstrap 4+

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ApiService } from '../api.service';
+
 import { SearchResultsService } from '../search-results.service';
 
 @Component({
@@ -13,6 +15,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public rs: SearchResultsService,
+    public asrv: ApiService,
   ) {
   }
 

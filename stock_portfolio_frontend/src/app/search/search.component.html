@@ -1,6 +1,9 @@
 <div class="container">
     <app-search-form></app-search-form>
     <mat-spinner *ngIf="rs.isLoading" diameter="40" class="mt-5 mx-auto"></mat-spinner>
+    <ngb-alert #APIErrorAlert *ngIf="asrv.APIErrorAlertMessage" type="danger" (closed)="asrv.APIErrorAlertMessage = ''"
+        class="mt-5 mx-auto">{{asrv.APIErrorAlertMessage }}
+    </ngb-alert>
     <ng-container *ngIf="rs.hasResults">
         <app-stock-details></app-stock-details>
         <app-stock-tabs></app-stock-tabs>
