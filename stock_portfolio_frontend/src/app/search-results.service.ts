@@ -51,6 +51,12 @@ export class SearchResultsService {
     this.isLoading = true;
     this.resetResults();
     this.fetchDescription(ticker);
+
+    try {
+      this.timerSubscription.unsubscribe();
+    } catch {
+
+    }
   }
 
   clearResults(): void {
