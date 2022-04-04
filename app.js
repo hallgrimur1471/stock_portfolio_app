@@ -13,11 +13,6 @@ app.set('json spaces', 2);
 
 app.use(express.static(process.cwd() + "/stock_portfolio_frontend/dist/stock_portfolio_frontend/"));
 
-app.get("/", (req, res) => {
-  res.sendFile(process.cwd() + "/stock_portfolio_frontend/dist/stock_portfolio_frontend/index.html");
-  // TODO: redirect to /search/home ?
-});
-
 app.get("/api/example", (req, res) => {
   res.json({ example: "value" });
 });
@@ -112,14 +107,16 @@ app.get("/api/peers", (req, res, next) => {
 });
 
 // Company's Earnings
-// TODO: Replace null values for response keys with 0
-//       See specs 4.1.9.
 app.get("/api/earnings", (req, res, next) => {
   let symbol = req.query.symbol;
   let key = process.env.FINHUB_API_KEY;
   let url = `https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${key}`;
 
   getFinnhub(url, res);
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(process.cwd() + "/stock_portfolio_frontend/dist/stock_portfolio_frontend/index.html");
 });
 
 // Start the server

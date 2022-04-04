@@ -1,3 +1,7 @@
 # [START gae_quickstart_yaml]
 runtime: nodejs14
+handlers:
+- url: /.*
+  secure: always
+  script: auto
 # [END gae_quickstart_yaml]
