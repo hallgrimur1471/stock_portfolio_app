@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-
 import { Portfolio } from './portfolio';
 import { Share } from './share';
 

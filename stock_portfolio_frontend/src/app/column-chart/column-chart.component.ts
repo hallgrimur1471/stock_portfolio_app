@@ -27,13 +27,13 @@ HC_Volume(Highcharts);
   styleUrls: ['./column-chart.component.css']
 })
 export class ColumnChartComponent implements OnInit {
-  Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor: string = 'chart'; // optional string, defaults to 'chart'
+  Highcharts: typeof Highcharts = Highcharts;
+  chartConstructor: string = 'chart';
   chartOptions: Highcharts.Options = {};
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
-  updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = false; // optional boolean, defaults to false
-  runOutsideAngular: boolean = false; // optional boolean, defaults to false
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { };
+  updateFlag: boolean = false;
+  oneToOneFlag: boolean = false;
+  runOutsideAngular: boolean = false;
 
   strongBuys: number[] = [];
   buys: number[] = [];

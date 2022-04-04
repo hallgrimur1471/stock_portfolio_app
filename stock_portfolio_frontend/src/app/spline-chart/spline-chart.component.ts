@@ -29,20 +29,13 @@ HC_Volume(Highcharts);
   styleUrls: ['./spline-chart.component.css']
 })
 export class SplineChartComponent implements OnInit {
-  Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor: string = 'chart'; // optional string, defaults to 'chart'
+  Highcharts: typeof Highcharts = Highcharts;
+  chartConstructor: string = 'chart';
   chartOptions: any = {};
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
-  updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = false; // optional boolean, defaults to false
-  runOutsideAngular: boolean = false; // optional boolean, defaults to false
-
-  // strongBuys: number[] = [];
-  // buys: number[] = [];
-  // holds: number[] = [];
-  // strongSells: number[] = [];
-  // sells: number[] = [];
-  // months: string[] = [];
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { }
+  updateFlag: boolean = false;
+  oneToOneFlag: boolean = false;
+  runOutsideAngular: boolean = false;
 
   actuals: any[][] = [];
   estimates: any[][] = [];
@@ -50,25 +43,11 @@ export class SplineChartComponent implements OnInit {
 
   constructor(public rs: SearchResultsService) { }
 
-
-  // tooltip: {
-  //   headerFormat: '<b>{series.name}</b><br/>',
-  //   pointFormat: '{point.x} km: {point.y}°C'
-  // },
-
   ngOnInit(): void {
-    // let trends = this.rs.trends;
-    // this.strongBuys = trends.map((trend: any) => trend.strongBuy);
-    // this.buys = trends.map((trend: any) => trend.buy);
-    // this.holds = trends.map((trend: any) => trend.hold);
-    // this.strongSells = trends.map((trend: any) => trend.strongSell);
-    // this.sells = trends.map((trend: any) => trend.sell);
-    // this.months = trends.map((trend: any) => trend.period.slice(0, -3));
     let earnings = this.rs.earnings;
     this.xAxis = earnings.map((x: any) => x.period + "<br>" + "Surprise: " + x.surprise);
     this.actuals = earnings.map((x: any, i: number) => [this.xAxis[i], x.actual]);
     this.estimates = earnings.map((x: any, i: number) => [this.xAxis[i], x.estimate]);
-    // data: [["one", 15], ["two", 50]]
 
     this.chartOptions = {
       chart: {
@@ -125,5 +104,4 @@ export class SplineChartComponent implements OnInit {
       }
     }
   }
-
 }

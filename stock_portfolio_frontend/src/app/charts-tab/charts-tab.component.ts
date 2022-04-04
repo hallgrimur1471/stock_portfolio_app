@@ -29,17 +29,17 @@ HC_Volume(Highcharts);
   styleUrls: ['./charts-tab.component.css']
 })
 export class ChartsTabComponent implements OnInit {
-  Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor: string = 'stockChart'; // optional string, defaults to 'chart'
+  Highcharts: typeof Highcharts = Highcharts;
+  chartConstructor: string = 'stockChart';
   chartOptions: Highcharts.Options = {};
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
-  updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = false; // optional boolean, defaults to false
-  runOutsideAngular: boolean = false; // optional boolean, defaults to false
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { };
+  updateFlag: boolean = false;
+  oneToOneFlag: boolean = false;
+  runOutsideAngular: boolean = false;
 
-  groupingUnits: any = [[
-    'week',                         // unit name
-    [1]                             // allowed multiples
+  dataGroupingUnits: any = [[
+    'week',
+    [1]
   ], [
     'month',
     [1, 2, 3, 4, 6]
@@ -105,7 +105,7 @@ export class ChartsTabComponent implements OnInit {
       plotOptions: {
         series: {
           dataGrouping: {
-            units: this.groupingUnits
+            units: this.dataGroupingUnits
           }
         }
       },

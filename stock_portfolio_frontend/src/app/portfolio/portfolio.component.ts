@@ -7,7 +7,6 @@ import { debounceTime } from 'rxjs/operators';
 
 import { BuyModalComponent } from '../buy-modal/buy-modal.component'
 
-import { Portfolio } from '../portfolio';
 import { PortfolioService } from '../portfolio.service';
 
 @Component({
@@ -16,8 +15,6 @@ import { PortfolioService } from '../portfolio.service';
   styleUrls: ['./portfolio.component.css']
 })
 export class PortfolioComponent implements OnInit {
-  // portfolio!: Portfolio;
-
   buyAlertMessage: string = '';
   sellAlertMessage: string = '';
   private buyAlertSubject = new Subject<string>();

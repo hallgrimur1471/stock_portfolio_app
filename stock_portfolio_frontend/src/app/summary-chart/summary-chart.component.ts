@@ -12,13 +12,13 @@ import * as Highcharts from 'highcharts/highstock';
   styleUrls: ['./summary-chart.component.css']
 })
 export class SummaryChartComponent implements OnInit {
-  Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor: string = 'stockChart'; // optional string, defaults to 'chart'
+  Highcharts: typeof Highcharts = Highcharts;
+  chartConstructor: string = 'stockChart';
   chartOptions: Highcharts.Options = {};
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
-  updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = true; // optional boolean, defaults to false
-  runOutsideAngular: boolean = false; // optional boolean, defaults to false
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { }
+  updateFlag: boolean = false;
+  oneToOneFlag: boolean = true;
+  runOutsideAngular: boolean = false;
 
   timerSubscription!: Subscription;
 
@@ -62,7 +62,7 @@ export class SummaryChartComponent implements OnInit {
       rangeSelector: {
         enabled: false
       }
-    }; // required
+    };
     this.timerSubscription = timer(0, 500).pipe(
       map(() => {
         chartColor = this.rs.quote.dp > 0 ? '#198754' : '#dc3545'

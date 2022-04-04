@@ -70,22 +70,6 @@ export class WatchlistService {
   private getWatchlistFromLocalStorage(): WatchlistEntry[] {
     const wl_str = localStorage.getItem("watchlist");
     return wl_str ? JSON.parse(wl_str) : [];
-    // [
-    //   {
-    //     ticker: "GOOGL",
-    //     name: "Alphabet Inc",
-    //     currentPrice: 2627.75,
-    //     changeInPrice: 75.99,
-    //     changeInPricePercentage: 2.9791234234
-    //   },
-    //   {
-    //     ticker: "MSFT",
-    //     name: "Microsoft Corp",
-    //     currentPrice: 290.42,
-    //     changeInPrice: -10.15,
-    //     changeInPricePercentage: -3.621234234
-    //   }
-    // ];
   }
 
   private saveWatchlist(): void {
