@@ -1,6 +1,6 @@
 # Stock Portfolio
 
-Deployed on: https://stock-portfolio-52775.wl.r.appspot.com/search/TSLA
+Deployed at: https://stock-portfolio-52775.wl.r.appspot.com/search/TSLA
 
 ## Setup
 
